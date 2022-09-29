@@ -1,31 +1,38 @@
 package com.eatitdog.eatitdog.food.domain.entity;
 
+import com.eatitdog.eatitdog.food.domain.enums.FoodSafeness;
 import com.eatitdog.eatitdog.food.domain.enums.FoodStatus;
 import com.eatitdog.eatitdog.food.domain.enums.FoodType;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity(name = "food")
+@Entity
+@Table(name = "food")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Food {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Column(nullable = false)
     private String name;
 
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
-    private FoodType foodType;
+    private FoodType type;
 
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
-    private FoodStatus foodStatus;
+    private FoodSafeness safeness;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
+    private FoodStatus status;
 
     @Column(columnDefinition = "MEDIUMTEXT")
     private String eatingMethod;
@@ -38,4 +45,15 @@ public class Food {
 
     @Column(columnDefinition = "MEDIUMTEXT")
     private String caution;
+
+    @Builder
+    public Food(String name, FoodType type, FoodSafeness safeness, String eatingMethod, String symptom, String benefit, String caution) {
+        this.name = name;
+        this.type = type;
+        this.safeness = safeness;
+        this.eatingMethod = eatingMethod;
+        this.symptom = symptom;
+        this.benefit = benefit;
+        this.caution = caution;
+    }
 }

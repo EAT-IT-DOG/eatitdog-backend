@@ -1,7 +1,8 @@
-package com.eatitdog.eatitdog.user.controller;
+package com.eatitdog.eatitdog.food.presentation;
 
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UserController {
+public class FoodController {
+
 }
