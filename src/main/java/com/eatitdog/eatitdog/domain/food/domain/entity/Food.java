@@ -1,8 +1,8 @@
-package com.eatitdog.eatitdog.food.domain.entity;
+package com.eatitdog.eatitdog.domain.food.domain.entity;
 
-import com.eatitdog.eatitdog.food.domain.enums.FoodSafeness;
-import com.eatitdog.eatitdog.food.domain.enums.FoodStatus;
-import com.eatitdog.eatitdog.food.domain.enums.FoodType;
+import com.eatitdog.eatitdog.domain.food.domain.enums.FoodSafeness;
+import com.eatitdog.eatitdog.domain.food.domain.enums.FoodStatus;
+import com.eatitdog.eatitdog.domain.food.domain.enums.FoodType;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

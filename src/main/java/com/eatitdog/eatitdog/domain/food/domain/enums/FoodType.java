@@ -1,4 +1,4 @@
-package com.eatitdog.eatitdog.food.domain.enums;
+package com.eatitdog.eatitdog.domain.food.domain.enums;
 
 public enum FoodType {
     MILK_PRODUCT,

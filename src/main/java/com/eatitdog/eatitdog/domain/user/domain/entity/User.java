@@ -1,4 +1,4 @@
-package com.eatitdog.eatitdog.user.domain.entity;
+package com.eatitdog.eatitdog.domain.user.domain.entity;
 
 import lombok.AccessLevel;
 import lombok.Builder;
