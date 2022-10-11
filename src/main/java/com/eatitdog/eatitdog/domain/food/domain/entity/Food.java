@@ -1,7 +1,6 @@
 package com.eatitdog.eatitdog.domain.food.domain.entity;
 
 import com.eatitdog.eatitdog.domain.food.domain.enums.FoodSafeness;
-import com.eatitdog.eatitdog.domain.food.domain.enums.FoodStatus;
 import com.eatitdog.eatitdog.domain.food.domain.enums.FoodType;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -29,10 +28,6 @@ public class Food {
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
     private FoodSafeness safeness;
-
-    @Enumerated(value = EnumType.STRING)
-    @Column(nullable = false)
-    private FoodStatus status;
 
     @Column(columnDefinition = "MEDIUMTEXT")
     private String eatingMethod;
