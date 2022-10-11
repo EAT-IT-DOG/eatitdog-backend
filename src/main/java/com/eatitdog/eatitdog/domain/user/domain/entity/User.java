@@ -31,6 +31,10 @@ public class User {
     @Column(nullable = false)
     private String image;
 
+    public void updateImage(String image) {
+        this.image = image;
+    }
+
     @Builder
     public User(String name, String email, String password) {
         this.name = name;

@@ -25,8 +25,8 @@ public class AuthController {
 
     }
 
-    @DeleteMapping("/withdraw")
-    public void withdraw() {
+    @DeleteMapping("/unregister")
+    public void unregister() {
 
     }
 }
