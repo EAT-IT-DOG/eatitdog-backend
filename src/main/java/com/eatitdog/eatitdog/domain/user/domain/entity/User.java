@@ -1,5 +1,6 @@
 package com.eatitdog.eatitdog.domain.user.domain.entity;
 
+import com.eatitdog.eatitdog.global.jpa.BaseTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import javax.validation.constraints.Size;
 @Table(name = "user")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User {
+public class User extends BaseTime {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
