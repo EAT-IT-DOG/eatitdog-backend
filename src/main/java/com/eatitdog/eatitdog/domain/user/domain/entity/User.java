@@ -26,7 +26,6 @@ public class User extends BaseTime {
     @Size(max = 255)
     private String email;
 
-    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
