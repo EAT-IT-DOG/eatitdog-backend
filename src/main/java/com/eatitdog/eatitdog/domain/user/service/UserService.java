@@ -1,7 +1,9 @@
 package com.eatitdog.eatitdog.domain.user.service;
 
-import org.springframework.stereotype.Service;
+import com.eatitdog.eatitdog.global.annotation.ServiceWithTransactionalReadOnly;
+import lombok.RequiredArgsConstructor;
 
-@Service
+@ServiceWithTransactionalReadOnly
+@RequiredArgsConstructor
 public class UserService {
 }

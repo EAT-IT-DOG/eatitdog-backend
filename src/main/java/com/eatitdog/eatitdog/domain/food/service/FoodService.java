@@ -5,13 +5,13 @@ import com.eatitdog.eatitdog.domain.food.domain.enums.FoodType;
 import com.eatitdog.eatitdog.domain.food.domain.repository.FoodRepository;
 import com.eatitdog.eatitdog.domain.food.exception.FoodNotFoundException;
 import com.eatitdog.eatitdog.domain.food.presentation.dto.response.FoodNameResponse;
+import com.eatitdog.eatitdog.global.annotation.ServiceWithTransactionalReadOnly;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@ServiceWithTransactionalReadOnly
 @RequiredArgsConstructor
 public class FoodService {
 

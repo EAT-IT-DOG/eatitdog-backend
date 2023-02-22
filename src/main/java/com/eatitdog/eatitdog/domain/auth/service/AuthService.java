@@ -8,14 +8,14 @@ import com.eatitdog.eatitdog.domain.user.domain.entity.User;
 import com.eatitdog.eatitdog.domain.user.domain.repository.UserRepository;
 import com.eatitdog.eatitdog.domain.user.exception.PasswordNotMatchException;
 import com.eatitdog.eatitdog.domain.user.exception.UserNotFoundException;
+import com.eatitdog.eatitdog.global.annotation.ServiceWithTransactionalReadOnly;
 import com.eatitdog.eatitdog.global.lib.jwt.Jwt;
 import com.eatitdog.eatitdog.global.lib.encrypt.Encrypt;
 import com.eatitdog.eatitdog.global.lib.jwt.JwtType;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@ServiceWithTransactionalReadOnly
 @RequiredArgsConstructor
 public class AuthService {
 
@@ -57,6 +57,7 @@ public class AuthService {
         return new LoginTokenResponse(accessToken, refreshToken);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public void unregister(User user) {
 
         userRepository.delete(user);

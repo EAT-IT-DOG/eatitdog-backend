@@ -47,9 +47,12 @@ public class Apply extends BaseTime {
     @Column(columnDefinition = "MEDIUMTEXT")
     private String caution;
 
-    @Builder
-    public Apply(User user, String foodName, FoodType type, FoodSafeness safeness, String eatingMethod, String symptom, String benefit, String caution) {
+    public void injectUser(User user) {
         this.user = user;
+    }
+
+    @Builder
+    public Apply(String foodName, FoodType type, FoodSafeness safeness, String eatingMethod, String symptom, String benefit, String caution) {
         this.foodName = foodName;
         this.type = type;
         this.safeness = safeness;
