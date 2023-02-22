@@ -1,5 +1,6 @@
 package com.eatitdog.eatitdog.domain.auth.presentation.dto.request;
 
+import com.eatitdog.eatitdog.domain.user.domain.entity.User;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;

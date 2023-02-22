@@ -28,7 +28,6 @@ public class User extends BaseTime {
 
     private String password;
 
-    @Column(nullable = false)
     private String image;
 
     public void updateImage(String image) {

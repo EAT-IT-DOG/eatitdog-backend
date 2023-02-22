@@ -9,4 +9,8 @@ public class ValidMessageConstants {
     public static final String SYMPTOM_NOT_BLANK = "증상은 Null, 공백, 띄워쓰기를 허용하지 않습니다.";
     public static final String BENEFIT_NOT_BLANK = "이점은 Null, 공백, 띄워쓰기를 허용하지 않습니다.";
     public static final String CAUTION_NOT_BLANK = "주의 사항은 Null, 공백, 띄워쓰기를 허용하지 않습니다.";
+
+    public static final String NAME_NOT_BLANK = "이름은 Null, 공백, 띄워쓰기를 허용하지 않습니다.";
+    public static final String EMAIL_NOT_BLANK = "이메일은 Null, 공백, 띄워쓰기를 허용하지 않습니다.";
+    public static final String PASSWORD_NOT_BLANK = "비밀번호는 Null, 공백, 띄워쓰기를 허용하지 않습니다.";
 }

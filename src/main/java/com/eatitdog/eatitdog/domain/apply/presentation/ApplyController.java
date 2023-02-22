@@ -6,6 +6,8 @@ import com.eatitdog.eatitdog.domain.user.domain.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/apply")
 @RequiredArgsConstructor
@@ -15,7 +17,7 @@ public class ApplyController {
 
     @PostMapping
     public void create(
-            @RequestBody CreateApplyRequest request,
+            @RequestBody @Valid CreateApplyRequest request,
             @RequestAttribute User user
     ) {
         applyService.createApply(request, user);
