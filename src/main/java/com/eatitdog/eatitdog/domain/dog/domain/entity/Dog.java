@@ -1,7 +1,6 @@
 package com.eatitdog.eatitdog.domain.dog.domain.entity;
 
 import com.eatitdog.eatitdog.domain.dog.domain.enums.Sex;
-import com.eatitdog.eatitdog.domain.dog.exception.BirthDateNotValidException;
 import com.eatitdog.eatitdog.domain.user.domain.entity.User;
 import com.eatitdog.eatitdog.global.jpa.BaseTime;
 import lombok.AccessLevel;
@@ -39,18 +38,10 @@ public class Dog extends BaseTime {
 
     @Builder
     public Dog(String name, LocalDate birthDate, Sex sex, User user, Breed breed) {
-        checkBirthDateValid(birthDate);
         this.name = name;
         this.birthDate = birthDate;
         this.sex = sex;
         this.user = user;
         this.breed = breed;
-    }
-
-    private void checkBirthDateValid(LocalDate birthDate) {
-        LocalDate now = LocalDate.now();
-        if (birthDate.isAfter(now)) {
-            throw BirthDateNotValidException.EXCEPTION;
-        }
     }
 }
