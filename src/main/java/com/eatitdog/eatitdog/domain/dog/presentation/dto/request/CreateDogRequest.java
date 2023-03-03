@@ -1,5 +1,6 @@
 package com.eatitdog.eatitdog.domain.dog.presentation.dto.request;
 
+import com.eatitdog.eatitdog.domain.dog.domain.Dog;
 import com.eatitdog.eatitdog.domain.dog.enums.Sex;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -33,4 +34,12 @@ public class CreateDogRequest {
 
     @NotBlank(message = BREED_NOT_BLANK)
     private String breed;
+
+    public Dog toEntity() {
+        return Dog.builder()
+                .name(name)
+                .birthDate(birthDate)
+                .sex(sex)
+                .build();
+    }
 }
