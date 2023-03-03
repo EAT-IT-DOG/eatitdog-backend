@@ -1,0 +1,21 @@
+type :: description
+
+################
+# <타입> :: <제목> 의 형식으로 제목을 위 줄에 작성
+# 제목은 50자 이내 / 변경사항이 "무엇"인지 명확히 작성 / 끝에 마침표 금지
+# ex) :sparkles: :: DateParser Util 구현
+
+################
+# ✨ :sparkles: 새 기능 (파일 추가)
+# 📝 :memo: 코드 수정 (요구사항 수정)
+# 🎨 :art: 코드 구조 개선
+# ⚡️ :zap: 코드 성능 개선
+# 🔥 :fire: 코드 삭제 (파일 삭제)
+# 📄 :page_facing_up: 문서 작성 및 변경
+# 🔧 :wrench: Configuration 파일 변경/의존성 추가 및 삭제
+# 👷 :construction_worker: CI/CD 시스템 추가 혹은 수정
+# 🐛 :bug: 버그 수정
+# ✅ :white_check_mark: 테스트 케이스 작성 및 수정
+# ⏪ :rewind: :: 작업 되돌리기
+# 🚑 :ambulance: :: 긴급 수정
+# 🙈 :see_no_evil: :: .gitignore 추가/수정
