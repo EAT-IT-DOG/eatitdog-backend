@@ -1,0 +1,47 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB-URL}
+    username: ${DB-USERNAME}
+    password: ${DB-PASSWORD}
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      format_sql: true
+      ddl-auto: update
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+logging:
+  level:
+    org.springframework.boot.autoconfigure: ERROR
+    com.amazonaws.util.EC2MetadataUtils: error
+
+cloud:
+  aws:
+    credentials:
+      access-key: ${S3-ACCESS-KEY}
+      secret-key: ${S3-SECRET-KEY}
+    stack:
+      auto: false
+    region:
+      static: ${REGION}
+    s3:
+      bucket: ${BUCKET-NAME}
+
+jwt:
+  secret:
+    access: ${JWT-ACCESS-SECRET}
+    refresh: ${JWT-REFRESH-SECRET}
