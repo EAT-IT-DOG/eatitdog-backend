@@ -1,8 +1,8 @@
 package com.eatitdog.eatitdog.domain.apply.presentation.dto.request;
 
-import com.eatitdog.eatitdog.domain.apply.domain.entity.Apply;
-import com.eatitdog.eatitdog.domain.food.domain.enums.FoodSafeness;
-import com.eatitdog.eatitdog.domain.food.domain.enums.FoodType;
+import com.eatitdog.eatitdog.domain.apply.domain.Apply;
+import com.eatitdog.eatitdog.domain.food.enums.FoodSafeness;
+import com.eatitdog.eatitdog.domain.food.enums.FoodType;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;

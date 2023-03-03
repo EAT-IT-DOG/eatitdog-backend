@@ -1,7 +1,7 @@
 package com.eatitdog.eatitdog.domain.food.presentation;
 
-import com.eatitdog.eatitdog.domain.food.domain.entity.Food;
-import com.eatitdog.eatitdog.domain.food.domain.enums.FoodType;
+import com.eatitdog.eatitdog.domain.food.domain.Food;
+import com.eatitdog.eatitdog.domain.food.enums.FoodType;
 import com.eatitdog.eatitdog.domain.food.presentation.dto.response.FoodNameResponse;
 import com.eatitdog.eatitdog.domain.food.service.FoodService;
 import lombok.RequiredArgsConstructor;

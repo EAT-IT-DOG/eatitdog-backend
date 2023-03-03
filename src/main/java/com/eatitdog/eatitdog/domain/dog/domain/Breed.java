@@ -1,4 +1,4 @@
-package com.eatitdog.eatitdog.domain.dog.domain.entity;
+package com.eatitdog.eatitdog.domain.dog.domain;
 
 import com.eatitdog.eatitdog.global.jpa.BaseTime;
 import lombok.AccessLevel;

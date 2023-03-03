@@ -1,6 +1,6 @@
 package com.eatitdog.eatitdog.global.lib.jwt;
 
-import com.eatitdog.eatitdog.domain.user.domain.entity.User;
+import com.eatitdog.eatitdog.domain.user.domain.User;
 import com.eatitdog.eatitdog.domain.user.domain.repository.UserRepository;
 import com.eatitdog.eatitdog.global.exception.global.InvalidTokenException;
 import com.eatitdog.eatitdog.global.lib.encrypt.Encrypt;

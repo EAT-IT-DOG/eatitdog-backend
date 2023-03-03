@@ -4,7 +4,7 @@ import com.eatitdog.eatitdog.domain.auth.exception.UserEmailExistsException;
 import com.eatitdog.eatitdog.domain.auth.presentation.dto.request.CreateUserRequest;
 import com.eatitdog.eatitdog.domain.auth.presentation.dto.request.LoginRequest;
 import com.eatitdog.eatitdog.domain.auth.presentation.dto.response.LoginTokenResponse;
-import com.eatitdog.eatitdog.domain.user.domain.entity.User;
+import com.eatitdog.eatitdog.domain.user.domain.User;
 import com.eatitdog.eatitdog.domain.user.domain.repository.UserRepository;
 import com.eatitdog.eatitdog.domain.user.exception.PasswordNotMatchException;
 import com.eatitdog.eatitdog.domain.user.exception.UserNotFoundException;

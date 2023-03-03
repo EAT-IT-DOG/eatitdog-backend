@@ -1,6 +1,6 @@
 package com.eatitdog.eatitdog.domain.user.domain.repository;
 
-import com.eatitdog.eatitdog.domain.user.domain.entity.User;
+import com.eatitdog.eatitdog.domain.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

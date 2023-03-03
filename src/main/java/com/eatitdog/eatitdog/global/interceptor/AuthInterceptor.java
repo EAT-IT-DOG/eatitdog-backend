@@ -1,6 +1,6 @@
 package com.eatitdog.eatitdog.global.interceptor;
 
-import com.eatitdog.eatitdog.domain.user.domain.entity.User;
+import com.eatitdog.eatitdog.domain.user.domain.User;
 import com.eatitdog.eatitdog.global.annotation.AuthorizationCheck;
 import com.eatitdog.eatitdog.global.exception.global.CredentialsNotFoundException;
 import com.eatitdog.eatitdog.global.lib.jwt.Jwt;

@@ -1,7 +1,7 @@
-package com.eatitdog.eatitdog.domain.dog.domain.entity;
+package com.eatitdog.eatitdog.domain.dog.domain;
 
-import com.eatitdog.eatitdog.domain.dog.domain.enums.Sex;
-import com.eatitdog.eatitdog.domain.user.domain.entity.User;
+import com.eatitdog.eatitdog.domain.dog.enums.Sex;
+import com.eatitdog.eatitdog.domain.user.domain.User;
 import com.eatitdog.eatitdog.global.jpa.BaseTime;
 import lombok.AccessLevel;
 import lombok.Builder;

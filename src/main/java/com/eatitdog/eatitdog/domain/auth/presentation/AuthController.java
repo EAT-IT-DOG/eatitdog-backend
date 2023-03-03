@@ -4,7 +4,7 @@ import com.eatitdog.eatitdog.domain.auth.presentation.dto.request.LoginRequest;
 import com.eatitdog.eatitdog.domain.auth.presentation.dto.response.LoginTokenResponse;
 import com.eatitdog.eatitdog.domain.auth.service.AuthService;
 import com.eatitdog.eatitdog.domain.auth.presentation.dto.request.CreateUserRequest;
-import com.eatitdog.eatitdog.domain.user.domain.entity.User;
+import com.eatitdog.eatitdog.domain.user.domain.User;
 import com.eatitdog.eatitdog.global.annotation.AuthorizationCheck;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
 package com.eatitdog.eatitdog.domain.dog.presentation.dto.request;
 
-import com.eatitdog.eatitdog.domain.dog.domain.enums.Sex;
+import com.eatitdog.eatitdog.domain.dog.enums.Sex;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;

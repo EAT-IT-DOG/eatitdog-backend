@@ -1,8 +1,8 @@
 package com.eatitdog.eatitdog.domain.dog.presentation;
 
-import com.eatitdog.eatitdog.domain.dog.domain.entity.Dog;
+import com.eatitdog.eatitdog.domain.dog.domain.Dog;
 import com.eatitdog.eatitdog.domain.dog.presentation.dto.request.CreateDogRequest;
-import com.eatitdog.eatitdog.domain.user.domain.entity.User;
+import com.eatitdog.eatitdog.domain.user.domain.User;
 import com.eatitdog.eatitdog.global.annotation.AuthorizationCheck;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
