@@ -42,7 +42,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           password: ${{ secrets.EC2_PASSWORD }}
           script: |
-            docker rm -f $(docker ps -qa)
+            docker rm eatitdog
             docker rmi ${{ secrets.DOCKER_USERNAME }}/eatitdog:latest
             docker pull ${{ secrets.DOCKER_USERNAME }}/eatitdog:latest
             docker-compose up -d
