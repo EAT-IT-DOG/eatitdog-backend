@@ -1,10 +1,17 @@
 version: '3'
 services:
-  app:
-    container_name: eatitdog
+  eatitdog:
     image: wjs0518/eatitdog:latest
-    expose:
-      - 8080
     ports:
       - 8080:8080
     restart: always
+    environment:
+      DB-URL: ${DB-URL}
+      DB-USERNAME: ${DB-USERNAME}
+      DB-PASSWORD: ${DB-PASSWORD}
+      S3-ACCESS-KEY: ${S3-ACCESS-KEY}
+      S3-SECRET-KEY: ${S3-SECRET-KEY}
+      REGION: ${REGION}
+      BUCKET-NAME: ${BUCKET-NAME}
+      JWT-ACCESS-SECRET: ${JWT-ACCESS-SECRET}
+      JWT-REFRESH-SECRET: ${JWT-REFRESH-SECRET}

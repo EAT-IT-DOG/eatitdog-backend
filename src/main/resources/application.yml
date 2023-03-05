@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DB-URL}
+    url: jdbc:mysql://${DB-URL}/eatitdog?serverTimezone=Asia/Seoul
     username: ${DB-USERNAME}
     password: ${DB-PASSWORD}
   jackson:

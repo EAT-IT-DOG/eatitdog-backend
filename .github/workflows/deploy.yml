@@ -23,6 +23,21 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
+      # 환경변수 .env 파일 생성 및 write
+      - name: Set .env for configuration
+        run: |
+          touch ./.env
+          echo "DB-URL=${{ secrets.DB_URL }}" >> ./.env
+          echo "DB-USERNAME=${{ secrets.DB_USERNAME }}" >> ./.env
+          echo "DB-PASSWORD=${{ secrets.DB_PASSWORD }}" >> ./.env
+          echo "S3-ACCESS-KEY=${{ secrets.S3_ACCESS_KEY }}" >> ./.env 
+          echo "S3-SECRET-KEY=${{ secrets.S3_SECRET_KEY }}" >> ./.env
+          echo "REGION=${{ secrets.REGION }}" >> ./.env
+          echo "BUCKET-NAME=${{ secrets.BUCKET_NAME }}" >> ./.env
+          echo "JWT-ACCESS-SECRET=${{ secrets.JWT_ACCESS_SECRET }}" >> ./.env
+          echo "JWT-REFRESH-SECRET=${{ secrets.JWT_REFRESH_SECRET }}" >> ./.env
+        shell: bash
+
       # Gradle build
       - name: Build with Gradle
         run: ./gradlew bootJar
