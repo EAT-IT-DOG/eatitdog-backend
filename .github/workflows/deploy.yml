@@ -23,25 +23,6 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      # 그래들 캐싱
-      - name: Gradle Caching
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      # main 설정 파일 생성 및 write
-      - name: Set .yml for main
-        run: |
-          cd ./src/main/resources
-          touch ./application-database.yaml
-          echo "${{ secrets.MAIN_DATABASE_YML }}" >> ./application-database.yml
-        shell: bash
-
       # Gradle build
       - name: Build with Gradle
         run: ./gradlew bootJar
