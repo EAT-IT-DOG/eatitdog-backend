@@ -1,0 +1,9 @@
+version: '3'
+services:
+  spring:
+    container_name: eatitdog
+    image: wjs0518/eatitdog:latest
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
