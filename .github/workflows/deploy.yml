@@ -36,7 +36,7 @@ jobs:
           echo "BUCKET_NAME=${{ secrets.BUCKET_NAME }}" >> ./.env
           echo "JWT_ACCESS_SECRET=${{ secrets.JWT_ACCESS_SECRET }}" >> ./.env
           echo "JWT_REFRESH_SECRET=${{ secrets.JWT_REFRESH_SECRET }}" >> ./.env
-          echo "PORT=${{ PORT }}" >> ./.env
+          echo "PORT=${{ secrets.PORT }}" >> ./.env
         shell: bash
 
       # Gradle build
