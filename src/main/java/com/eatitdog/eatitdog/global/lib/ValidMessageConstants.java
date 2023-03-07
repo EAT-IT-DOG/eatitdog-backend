@@ -18,4 +18,6 @@ public class ValidMessageConstants {
     public static final String BIRTH_DATE_NOT_FUTURE = "출생 일자는 미래 시간을 허용하지 않습니다.";
     public static final String SEX_NOT_NULL = "성별은 Null을 허용하지 않습니다.";
     public static final String BREED_NOT_BLANK = "견종은 Null, 공백, 띄워쓰기를 허용하지 않습니다.";
+
+    public static final String REFRESH_TOKEN_NOT_BLANK = "Refresh Token은 Null, 공백, 띄워쓰기를 허용하지 않습니다.";
 }
