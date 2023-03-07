@@ -23,21 +23,21 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      # 환경변수 .env 파일 생성 및 write
-      - name: Set .env for configuration
-        run: |
-          touch ./.env
-          echo "DB_URL=${{ secrets.DB_URL }}" >> ./.env
-          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> ./.env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> ./.env
-          echo "S3_ACCESS_KEY=${{ secrets.S3_ACCESS_KEY }}" >> ./.env 
-          echo "S3_SECRET_KEY=${{ secrets.S3_SECRET_KEY }}" >> ./.env
-          echo "REGION=${{ secrets.REGION }}" >> ./.env
-          echo "BUCKET_NAME=${{ secrets.BUCKET_NAME }}" >> ./.env
-          echo "JWT_ACCESS_SECRET=${{ secrets.JWT_ACCESS_SECRET }}" >> ./.env
-          echo "JWT_REFRESH_SECRET=${{ secrets.JWT_REFRESH_SECRET }}" >> ./.env
-          echo "PORT=${{ secrets.APP_PORT }}" >> ./.env
-        shell: bash
+      # 환경변수 .env 파일 생성 및 write (docker-compose 대처법 숙지 후 다시 사용하기)
+#      - name: Set .env for configuration
+#        run: |
+#          touch ./.env
+#          echo "DB_URL=${{ secrets.DB_URL }}" >> ./.env
+#          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> ./.env
+#          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> ./.env
+#          echo "S3_ACCESS_KEY=${{ secrets.S3_ACCESS_KEY }}" >> ./.env
+#          echo "S3_SECRET_KEY=${{ secrets.S3_SECRET_KEY }}" >> ./.env
+#          echo "REGION=${{ secrets.REGION }}" >> ./.env
+#          echo "BUCKET_NAME=${{ secrets.BUCKET_NAME }}" >> ./.env
+#          echo "JWT_ACCESS_SECRET=${{ secrets.JWT_ACCESS_SECRET }}" >> ./.env
+#          echo "JWT_REFRESH_SECRET=${{ secrets.JWT_REFRESH_SECRET }}" >> ./.env
+#          echo "PORT=${{ secrets.APP_PORT }}" >> ./.env
+#        shell: bash
 
       # Gradle build
       - name: Build with Gradle
