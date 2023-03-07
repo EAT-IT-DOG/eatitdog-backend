@@ -4,6 +4,7 @@ import com.eatitdog.eatitdog.domain.dog.enums.Sex;
 import com.eatitdog.eatitdog.domain.dog.exception.DogNotOwnerException;
 import com.eatitdog.eatitdog.domain.user.domain.User;
 import com.eatitdog.eatitdog.global.jpa.BaseTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -25,6 +26,7 @@ public class Dog extends BaseTime {
     @Column(nullable = false)
     private String name;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     @Enumerated(EnumType.STRING)
