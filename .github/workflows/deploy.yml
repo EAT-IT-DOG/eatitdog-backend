@@ -59,6 +59,7 @@ jobs:
           password: ${{ secrets.EC2_PASSWORD }}
           port: 22
           script: |
+            docker stop eatitdog
             docker rm eatitdog
             docker rmi ${{ secrets.DOCKER_USERNAME }}/eatitdog:latest
             docker pull ${{ secrets.DOCKER_USERNAME }}/eatitdog:latest
