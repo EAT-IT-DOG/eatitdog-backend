@@ -1,6 +1,7 @@
 package com.eatitdog.eatitdog.domain.user.domain;
 
 import com.eatitdog.eatitdog.global.jpa.BaseTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,6 +27,7 @@ public class User extends BaseTime {
     @Size(max = 255)
     private String email;
 
+    @JsonIgnore
     private String password;
 
     private String image;

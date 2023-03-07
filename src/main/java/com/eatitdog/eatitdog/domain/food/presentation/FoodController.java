@@ -5,10 +5,8 @@ import com.eatitdog.eatitdog.domain.food.enums.FoodType;
 import com.eatitdog.eatitdog.domain.food.presentation.dto.response.FoodNameResponse;
 import com.eatitdog.eatitdog.domain.food.service.FoodService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,11 +18,13 @@ public class FoodController {
     private final FoodService foodService;
 
     @GetMapping("/type")
+    @ResponseStatus(HttpStatus.OK)
     public List<FoodNameResponse> getFoodNameByType(@RequestParam("type") FoodType type) {
         return foodService.getFoodNameByType(type);
     }
 
     @GetMapping("/name")
+    @ResponseStatus(HttpStatus.OK)
     public Food getFoodByName(@RequestParam("name") String name) {
         return foodService.getFoodByName(name);
     }

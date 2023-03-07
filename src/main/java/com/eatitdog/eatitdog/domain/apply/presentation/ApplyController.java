@@ -5,6 +5,7 @@ import com.eatitdog.eatitdog.domain.apply.service.ApplyService;
 import com.eatitdog.eatitdog.domain.user.domain.User;
 import com.eatitdog.eatitdog.global.annotation.AuthorizationCheck;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,6 +19,7 @@ public class ApplyController {
 
     @PostMapping
     @AuthorizationCheck
+    @ResponseStatus(HttpStatus.CREATED)
     public void create(
             @RequestBody @Valid CreateApplyRequest request,
             @RequestAttribute User user
