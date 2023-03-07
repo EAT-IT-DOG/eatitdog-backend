@@ -1,6 +1,13 @@
 ## 먹어보시개 백엔드 V2
 
+### 기술 스택
+* Backend : SpringBoot(Java), JPA, lombok
+* Deploy : Github Actions, AWS EC2(Elastic IP)
+* DB : MySQL, AWS RDS
+
 ### Commit 규칙
+
+`git commit template`을 사용하여 커밋 규칙을 강제합니다. (./.gitmessage)
 
 #### 기본 형식
 
