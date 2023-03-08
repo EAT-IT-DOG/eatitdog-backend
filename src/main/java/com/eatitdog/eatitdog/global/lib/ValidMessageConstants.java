@@ -13,6 +13,7 @@ public class ValidMessageConstants {
     public static final String NAME_NOT_BLANK = "이름은 Null, 공백, 띄워쓰기를 허용하지 않습니다.";
     public static final String EMAIL_NOT_BLANK = "이메일은 Null, 공백, 띄워쓰기를 허용하지 않습니다.";
     public static final String PASSWORD_NOT_BLANK = "비밀번호는 Null, 공백, 띄워쓰기를 허용하지 않습니다.";
+    public static final String IMAGE_NOT_BLANK = "이지미는 Null, 공백, 띄워쓰기를 허용하지 않습니다.";
 
     public static final String BIRTH_DATE_NOT_NULL = "출생 일자는 Null을 허용하지 않습니다.";
     public static final String BIRTH_DATE_NOT_FUTURE = "출생 일자는 미래 시간을 허용하지 않습니다.";
@@ -20,4 +21,7 @@ public class ValidMessageConstants {
     public static final String BREED_NOT_BLANK = "견종은 Null, 공백, 띄워쓰기를 허용하지 않습니다.";
 
     public static final String REFRESH_TOKEN_NOT_BLANK = "Refresh Token은 Null, 공백, 띄워쓰기를 허용하지 않습니다.";
+
+    public static final String PREVIOUS_PASSWORD_NOT_BLANK = "이전 비밀번호는 Null, 공백, 띄워쓰기를 허용하지 않습니다.";
+    public static final String NEW_PASSWORD_NOT_BLANK = "새로운 비밀번호는 Null, 공백, 띄워쓰기를 허용하지 않습니다.";
 }

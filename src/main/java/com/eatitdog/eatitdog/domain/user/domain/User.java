@@ -1,6 +1,8 @@
 package com.eatitdog.eatitdog.domain.user.domain;
 
+import com.eatitdog.eatitdog.domain.user.exception.PasswordNotMatchException;
 import com.eatitdog.eatitdog.global.jpa.BaseTime;
+import com.eatitdog.eatitdog.global.lib.encrypt.Encrypt;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -32,8 +34,17 @@ public class User extends BaseTime {
 
     private String image;
 
-    public void updateImage(String image) {
-        this.image = image;
+    public void updateUser(String name, String email, String image) {
+        this.name = name.isBlank() ? this.name : name;
+        this.email = email.isBlank() ? this.email : email;
+        this.image = image.isBlank() ? this.image : image;
+    }
+
+    public void updatePassword(Encrypt encrypt, String previousPassword, String newPassword) {
+        if (!encrypt.match(previousPassword, password)) {
+            throw PasswordNotMatchException.EXCEPTION;
+        }
+        password = encrypt.encode(newPassword);
     }
 
     @Builder
