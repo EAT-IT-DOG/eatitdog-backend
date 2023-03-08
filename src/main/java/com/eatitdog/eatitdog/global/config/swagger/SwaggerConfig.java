@@ -1,5 +1,6 @@
 package com.eatitdog.eatitdog.global.config.swagger;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -23,6 +24,9 @@ import java.util.List;
 @EnableWebMvc
 public class SwaggerConfig implements WebMvcConfigurer {
 
+    @Value("${ext.appVersion}")
+    private String appVersion;
+
     @Bean
     public InternalResourceViewResolver defaultViewResolver() {
         return new InternalResourceViewResolver();
@@ -43,8 +47,8 @@ public class SwaggerConfig implements WebMvcConfigurer {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("먹어보시개")
-                .description("먹어보시개 V2 API 문서입니다.")
-                .version("2.0.0")
+                .description("먹어보시개 API 문서입니다.")
+                .version(appVersion)
                 .build();
     }
 
