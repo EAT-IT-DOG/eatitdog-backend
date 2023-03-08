@@ -24,8 +24,7 @@ import java.util.List;
 @EnableWebMvc
 public class SwaggerConfig implements WebMvcConfigurer {
 
-    @Value("${ext.appVersion}")
-    private String appVersion;
+    private static final String APP_VERSION = "1.0.0";
 
     @Bean
     public InternalResourceViewResolver defaultViewResolver() {
@@ -48,7 +47,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
         return new ApiInfoBuilder()
                 .title("먹어보시개")
                 .description("먹어보시개 API 문서입니다.")
-                .version(appVersion)
+                .version(APP_VERSION)
                 .build();
     }
 
