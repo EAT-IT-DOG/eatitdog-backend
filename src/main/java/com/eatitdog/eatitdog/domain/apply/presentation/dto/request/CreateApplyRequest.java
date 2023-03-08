@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import static com.eatitdog.eatitdog.global.lib.ValidMessageConstants.*;
+import static com.eatitdog.eatitdog.global.statics.ValidMessageConstants.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

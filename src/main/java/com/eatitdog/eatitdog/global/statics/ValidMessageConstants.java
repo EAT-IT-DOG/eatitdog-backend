@@ -1,4 +1,4 @@
-package com.eatitdog.eatitdog.global.lib;
+package com.eatitdog.eatitdog.global.statics;
 
 public class ValidMessageConstants {
 

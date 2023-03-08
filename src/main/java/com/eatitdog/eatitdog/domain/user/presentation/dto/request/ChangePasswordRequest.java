@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 
-import static com.eatitdog.eatitdog.global.lib.ValidMessageConstants.NEW_PASSWORD_NOT_BLANK;
-import static com.eatitdog.eatitdog.global.lib.ValidMessageConstants.PREVIOUS_PASSWORD_NOT_BLANK;
+import static com.eatitdog.eatitdog.global.statics.ValidMessageConstants.NEW_PASSWORD_NOT_BLANK;
+import static com.eatitdog.eatitdog.global.statics.ValidMessageConstants.PREVIOUS_PASSWORD_NOT_BLANK;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

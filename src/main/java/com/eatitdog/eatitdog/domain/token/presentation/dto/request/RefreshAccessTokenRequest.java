@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 
-import static com.eatitdog.eatitdog.global.lib.ValidMessageConstants.REFRESH_TOKEN_NOT_BLANK;
+import static com.eatitdog.eatitdog.global.statics.ValidMessageConstants.REFRESH_TOKEN_NOT_BLANK;
 
 @Getter
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)

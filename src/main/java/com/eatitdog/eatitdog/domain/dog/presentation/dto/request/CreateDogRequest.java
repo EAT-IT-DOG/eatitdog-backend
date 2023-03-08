@@ -14,7 +14,7 @@ import javax.validation.constraints.PastOrPresent;
 
 import java.time.LocalDate;
 
-import static com.eatitdog.eatitdog.global.lib.ValidMessageConstants.*;
+import static com.eatitdog.eatitdog.global.statics.ValidMessageConstants.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
