@@ -1,6 +1,5 @@
 package com.eatitdog.eatitdog.global.config.swagger;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -62,7 +61,9 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .contexts
                 .SecurityContext
                 .builder()
-                .securityReferences(defaultAuth()).forPaths(PathSelectors.any()).build();
+                .securityReferences(defaultAuth())
+                .operationSelector(operationContext -> true)
+                .build();
     }
 
     List<SecurityReference> defaultAuth() {
