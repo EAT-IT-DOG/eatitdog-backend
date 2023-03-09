@@ -16,7 +16,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -24,6 +23,8 @@ import java.util.List;
 public class SwaggerConfig implements WebMvcConfigurer {
 
     private static final String APP_VERSION = "1.0.0";
+    private static final String TITLE = "먹어보시개";
+    private static final String DESCRIPTION = "먹어보시개 API 문서입니다.";
 
     @Bean
     public InternalResourceViewResolver defaultViewResolver() {
@@ -38,14 +39,14 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo())
-                .securityContexts(Arrays.asList(securityContext()))
-                .securitySchemes(Arrays.asList(apiKey()));
+                .securityContexts(List.of(securityContext()))
+                .securitySchemes(List.of(apiKey()));
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("먹어보시개")
-                .description("먹어보시개 API 문서입니다.")
+                .title(TITLE)
+                .description(DESCRIPTION)
                 .version(APP_VERSION)
                 .build();
     }
@@ -70,6 +71,6 @@ public class SwaggerConfig implements WebMvcConfigurer {
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
-        return Arrays.asList(new SecurityReference("JWT", authorizationScopes));
+        return List.of(new SecurityReference("JWT", authorizationScopes));
     }
 }
