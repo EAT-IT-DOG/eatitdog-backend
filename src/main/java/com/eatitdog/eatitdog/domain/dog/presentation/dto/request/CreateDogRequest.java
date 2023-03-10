@@ -25,7 +25,6 @@ public class CreateDogRequest {
     @NotBlank(message = NAME_NOT_BLANK)
     private String name;
 
-    @NotNull(message = BIRTH_DATE_NOT_NULL)
     @PastOrPresent(message = BIRTH_DATE_NOT_FUTURE)
     private LocalDate birthDate;
 

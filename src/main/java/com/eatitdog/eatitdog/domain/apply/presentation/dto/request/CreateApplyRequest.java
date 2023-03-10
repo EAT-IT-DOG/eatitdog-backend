@@ -3,6 +3,7 @@ package com.eatitdog.eatitdog.domain.apply.presentation.dto.request;
 import com.eatitdog.eatitdog.domain.apply.domain.Apply;
 import com.eatitdog.eatitdog.domain.food.enums.FoodSafeness;
 import com.eatitdog.eatitdog.domain.food.enums.FoodType;
+import com.eatitdog.eatitdog.global.annotation.EnumValid;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
@@ -23,10 +24,12 @@ public class CreateApplyRequest {
     private String foodName;
 
     @NotNull(message = FOOD_TYPE_NOT_NULL)
-    private FoodType type;
+    @EnumValid(enumClass = FoodType.class, message = FOOD_TYPE_ENUM_VALUE)
+    private String type;
 
     @NotNull(message = FOOD_SAFENESS_NOT_NULL)
-    private FoodSafeness safeness;
+    @EnumValid(enumClass = FoodType.class, message = FOOD_SAFENESS_ENUM_VALUE)
+    private String safeness;
 
     @NotBlank(message = EATING_METHOD_NOT_BLANK)
     private String eatingMethod;
@@ -47,8 +50,8 @@ public class CreateApplyRequest {
                 .eatingMethod(eatingMethod)
                 .foodName(foodName)
                 .symptom(symptom)
-                .safeness(safeness)
-                .type(type)
+                .safeness(FoodSafeness.valueOf(safeness))
+                .type(FoodType.valueOf(type))
                 .build();
     }
 }
