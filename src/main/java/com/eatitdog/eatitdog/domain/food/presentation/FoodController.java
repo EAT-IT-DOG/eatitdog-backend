@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 @RestController
@@ -16,6 +18,15 @@ import java.util.List;
 public class FoodController {
 
     private final FoodService foodService;
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<Food> getFoods(
+            @RequestParam @PositiveOrZero int page,
+            @RequestParam @Positive int size
+    ) {
+        return foodService.getFoodsByPaging(page, size);
+    }
 
     @GetMapping("/type")
     @ResponseStatus(HttpStatus.OK)

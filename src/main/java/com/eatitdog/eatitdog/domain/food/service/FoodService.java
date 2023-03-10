@@ -7,6 +7,7 @@ import com.eatitdog.eatitdog.domain.food.exception.FoodNotFoundException;
 import com.eatitdog.eatitdog.domain.food.presentation.dto.response.FoodNameResponse;
 import com.eatitdog.eatitdog.global.annotation.ServiceWithTransactionalReadOnly;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +17,11 @@ import java.util.stream.Collectors;
 public class FoodService {
 
     private final FoodRepository foodRepository;
+
+    public List<Food> getFoodsByPaging(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return foodRepository.findAll(pageRequest).getContent();
+    }
 
     public List<FoodNameResponse> getFoodNameByType(FoodType type) {
         return foodRepository.findAllByType(type)
