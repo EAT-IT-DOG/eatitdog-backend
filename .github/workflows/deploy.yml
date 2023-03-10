@@ -23,6 +23,17 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
+      ## Gradle 캐싱
+      - name: Gradle Caching
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
       # 환경변수 .env 파일 생성 및 write (docker-compose 대처법 숙지 후 다시 사용하기)
 #      - name: Set .env for configuration
 #        run: |
@@ -39,7 +50,7 @@ jobs:
 #          echo "PORT=${{ secrets.APP_PORT }}" >> ./.env
 #        shell: bash
 
-      # Gradle build
+      # Gradle 빌드
       - name: Build with Gradle
         run: ./gradlew bootJar
 
@@ -50,6 +61,11 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USERNAME }}/eatitdog:latest .
           docker push ${{ secrets.DOCKER_USERNAME }}/eatitdog:latest
 
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       # 서버에서 Docker 이미지 실행
       - name: EC2 Docker Run
         uses: appleboy/ssh-action@v0.1.8
