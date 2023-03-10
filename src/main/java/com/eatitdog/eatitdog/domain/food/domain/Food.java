@@ -31,16 +31,16 @@ public class Food extends BaseTime {
     private FoodSafeness safeness;
 
     @Column(columnDefinition = "MEDIUMTEXT")
-    private String eatingMethod;
+    private String eatingMethod; // 급여 방법
 
     @Column(columnDefinition = "MEDIUMTEXT")
-    private String symptom;
+    private String symptom; // 증상
 
     @Column(columnDefinition = "MEDIUMTEXT")
-    private String benefit;
+    private String benefit; // 주성분 및 기능
 
     @Column(columnDefinition = "MEDIUMTEXT")
-    private String caution;
+    private String caution; // 주의사항
 
     @Builder
     public Food(String name, FoodType type, FoodSafeness safeness, String eatingMethod, String symptom, String benefit, String caution) {

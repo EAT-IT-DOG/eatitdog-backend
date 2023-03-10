@@ -1,5 +1,6 @@
 package com.eatitdog.eatitdog.domain.food.presentation.dto.response;
 
+import com.eatitdog.eatitdog.domain.food.enums.FoodSafeness;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
@@ -11,4 +12,5 @@ import lombok.Getter;
 public class FoodNameResponse {
 
     private String name;
+    private FoodSafeness safeness;
 }

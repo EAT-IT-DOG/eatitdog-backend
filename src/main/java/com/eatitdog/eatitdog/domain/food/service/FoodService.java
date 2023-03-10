@@ -20,7 +20,7 @@ public class FoodService {
     public List<FoodNameResponse> getFoodNameByType(FoodType type) {
         return foodRepository.findAllByType(type)
                 .stream()
-                .map((food) -> new FoodNameResponse(food.getName()))
+                .map((food) -> new FoodNameResponse(food.getName(), food.getSafeness()))
                 .collect(Collectors.toList());
     }
 
