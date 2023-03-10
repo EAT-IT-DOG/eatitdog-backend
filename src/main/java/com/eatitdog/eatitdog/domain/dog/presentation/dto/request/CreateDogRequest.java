@@ -2,6 +2,7 @@ package com.eatitdog.eatitdog.domain.dog.presentation.dto.request;
 
 import com.eatitdog.eatitdog.domain.dog.domain.Dog;
 import com.eatitdog.eatitdog.domain.dog.enums.Sex;
+import com.eatitdog.eatitdog.global.annotation.EnumValid;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
@@ -28,9 +29,9 @@ public class CreateDogRequest {
     @PastOrPresent(message = BIRTH_DATE_NOT_FUTURE)
     private LocalDate birthDate;
 
-    // TODO : Enum 유효성 검증 커스텀 validation 추가하기
     @NotNull(message = SEX_NOT_NULL)
-    private Sex sex;
+    @EnumValid(enumClass = Sex.class, message = SEX_ENUM_VALUE)
+    private String sex;
 
     @NotBlank(message = BREED_NOT_BLANK)
     private String breed;
@@ -39,7 +40,7 @@ public class CreateDogRequest {
         return Dog.builder()
                 .name(name)
                 .birthDate(birthDate)
-                .sex(sex)
+                .sex(Sex.valueOf(sex))
                 .build();
     }
 }

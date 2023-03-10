@@ -48,7 +48,7 @@ public class DogService {
         Dog dog = request.toEntity();
         dog.injectUser(user);
 
-        Breed breed = getBreedByName(request.getName());
+        Breed breed = getBreedByName(request.getBreed());
         dog.injectBreed(breed);
 
         dogRepository.save(dog);
