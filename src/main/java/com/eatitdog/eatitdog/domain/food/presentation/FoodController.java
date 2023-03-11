@@ -28,6 +28,12 @@ public class FoodController {
         return foodService.getFoodsByPaging(page, size);
     }
 
+    @GetMapping("/ranking")
+    @ResponseStatus(HttpStatus.OK)
+    public List<FoodNameResponse> getFoodsBySearchCount() {
+        return foodService.getFoodsBySearchCount();
+    }
+
     @GetMapping("/type")
     @ResponseStatus(HttpStatus.OK)
     public List<FoodNameResponse> getFoodNameByType(@RequestParam("type") FoodType type) {
@@ -38,5 +44,11 @@ public class FoodController {
     @ResponseStatus(HttpStatus.OK)
     public Food getFoodByName(@RequestParam("name") String name) {
         return foodService.getFoodByName(name);
+    }
+
+    @GetMapping("/random")
+    @ResponseStatus(HttpStatus.OK)
+    public Food getRandomFood() {
+        return foodService.getFoodByRandom();
     }
 }

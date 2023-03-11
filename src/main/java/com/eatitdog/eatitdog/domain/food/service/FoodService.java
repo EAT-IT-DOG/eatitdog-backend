@@ -8,6 +8,7 @@ import com.eatitdog.eatitdog.domain.food.presentation.dto.response.FoodNameRespo
 import com.eatitdog.eatitdog.global.annotation.ServiceWithTransactionalReadOnly;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,15 +24,30 @@ public class FoodService {
         return foodRepository.findAll(pageRequest).getContent();
     }
 
-    public List<FoodNameResponse> getFoodNameByType(FoodType type) {
-        return foodRepository.findAllByType(type)
+    public List<FoodNameResponse> getFoodsBySearchCount() {
+        return foodRepository.findTop18ByOrderBySearchCountDesc()
                 .stream()
-                .map((food) -> new FoodNameResponse(food.getName(), food.getSafeness()))
+                .map(food -> new FoodNameResponse(food.getName(), food.getSafeness()))
                 .collect(Collectors.toList());
     }
 
+    public List<FoodNameResponse> getFoodNameByType(FoodType type) {
+        return foodRepository.findAllByType(type)
+                .stream()
+                .map(food -> new FoodNameResponse(food.getName(), food.getSafeness()))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(rollbackFor = Exception.class)
     public Food getFoodByName(String name) {
-        return foodRepository.findByName(name)
+        Food food = foodRepository.findByName(name)
                 .orElseThrow(() -> FoodNotFoundException.EXCEPTION);
+        food.increaseCount();
+        return foodRepository.save(food);
+    }
+
+    public Food getFoodByRandom() {
+        return foodRepository.findByRandom()
+                .get(0);
     }
 }

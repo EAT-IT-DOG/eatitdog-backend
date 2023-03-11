@@ -42,6 +42,12 @@ public class Food extends BaseTime {
     @Column(columnDefinition = "MEDIUMTEXT")
     private String caution; // 주의사항
 
+    private long searchCount;
+
+    public void increaseCount() {
+        searchCount++;
+    }
+
     @Builder
     public Food(String name, FoodType type, FoodSafeness safeness, String eatingMethod, String symptom, String benefit, String caution) {
         this.name = name;
