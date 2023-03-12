@@ -1,6 +1,8 @@
 package com.eatitdog.eatitdog.global.interceptor;
 
 import com.eatitdog.eatitdog.domain.user.domain.User;
+import com.eatitdog.eatitdog.domain.user.enums.UserStatus;
+import com.eatitdog.eatitdog.domain.user.exception.UserDeactivatedException;
 import com.eatitdog.eatitdog.global.annotation.AuthorizationCheck;
 import com.eatitdog.eatitdog.global.exception.global.CredentialsNotFoundException;
 import com.eatitdog.eatitdog.global.lib.jwt.Jwt;
@@ -41,6 +43,11 @@ public class AuthInterceptor implements HandlerInterceptor {
         }
 
         User user = jwt.validateToken(token);
+
+        if (!user.getStatus().equals(UserStatus.ACTIVE)) {
+            throw UserDeactivatedException.EXCEPTION;
+        }
+
         request.setAttribute("user", user.getId());
         return true;
     }

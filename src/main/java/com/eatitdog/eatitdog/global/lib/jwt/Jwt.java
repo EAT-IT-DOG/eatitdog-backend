@@ -2,6 +2,7 @@ package com.eatitdog.eatitdog.global.lib.jwt;
 
 import com.eatitdog.eatitdog.domain.user.domain.User;
 import com.eatitdog.eatitdog.domain.user.domain.repository.UserRepository;
+import com.eatitdog.eatitdog.domain.user.exception.UserNotFoundException;
 import com.eatitdog.eatitdog.global.exception.global.InvalidTokenException;
 import com.eatitdog.eatitdog.global.lib.encrypt.Encrypt;
 import io.jsonwebtoken.Claims;
@@ -70,7 +71,7 @@ public class Jwt {
         Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(secretAccessKey)).parseClaimsJws(token).getBody();
 
         return userRepository.findById(claims.get("id", Long.class))
-                .orElseThrow(() -> InvalidTokenException.EXCEPTION);
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
 
     public String refresh(String refreshToken) {

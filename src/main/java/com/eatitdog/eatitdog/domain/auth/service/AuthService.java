@@ -59,8 +59,8 @@ public class AuthService {
 
     @Transactional(rollbackFor = Exception.class)
     public void unregister(User user) {
-
-        userRepository.delete(user);
+        user.deactivateUser();
+        userRepository.save(user);
     }
 
 }
