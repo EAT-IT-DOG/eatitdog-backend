@@ -6,7 +6,9 @@ import com.eatitdog.eatitdog.domain.auth.presentation.dto.request.LoginRequest;
 import com.eatitdog.eatitdog.domain.auth.presentation.dto.response.LoginTokenResponse;
 import com.eatitdog.eatitdog.domain.user.domain.User;
 import com.eatitdog.eatitdog.domain.user.domain.repository.UserRepository;
+import com.eatitdog.eatitdog.domain.user.enums.UserStatus;
 import com.eatitdog.eatitdog.domain.user.exception.PasswordNotMatchException;
+import com.eatitdog.eatitdog.domain.user.exception.UserDeactivatedException;
 import com.eatitdog.eatitdog.domain.user.exception.UserNotFoundException;
 import com.eatitdog.eatitdog.global.annotation.ServiceWithTransactionalReadOnly;
 import com.eatitdog.eatitdog.global.lib.jwt.Jwt;
@@ -49,6 +51,10 @@ public class AuthService {
 
         if (!encrypt.match(request.getPassword(), user.getPassword())) {
             throw PasswordNotMatchException.EXCEPTION;
+        }
+
+        if (!user.getStatus().equals(UserStatus.ACTIVE)) {
+            throw UserDeactivatedException.EXCEPTION;
         }
 
         String accessToken = jwt.createToken(user, JwtType.ACCESS);
