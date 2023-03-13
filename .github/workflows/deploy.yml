@@ -50,6 +50,10 @@ jobs:
 #          echo "PORT=${{ secrets.APP_PORT }}" >> ./.env
 #        shell: bash
 
+      # Gradle 실행 권한 설정
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
       # Gradle 빌드
       - name: Build with Gradle
         run: ./gradlew bootJar
