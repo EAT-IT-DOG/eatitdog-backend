@@ -2,6 +2,8 @@
 
 ![image](https://user-images.githubusercontent.com/80818534/223601480-41d10b62-ae0d-475e-a86d-2abd9b7b59bb.png)
 
+### 먹어보시개란?
+
 `먹어보시개` 서비스는 반려견이 먹어도 되는 음식인지, 먹으면 위험한 음식인지 궁금할 때 간결한 해답을 주는 서비스입니다. 반려견 집사로 생활하면서 느끼던 불편함에 착안해 개발했습니다.
 
 음식 별 `섭취 가능 여부`, `급여 방법`, `증상`, `주성분 및 기능` 등의 정보를 간결하고 정확하게 제공하여
@@ -9,18 +11,34 @@
 * 기존 블로그 및 인터넷 검색으로 찾는 시간 줄이기
 * 인터넷의 단순 광고성 포스팅, 틀린 정보 배제하기
 
-등과 같은 문제 해결을 시도합니다.
+등과 같은 문제 해결을 `앱/웹 플랫폼`으로서 시도합니다.
 
-### 기술 스택
-* Backend : SpringBoot(Java), JPA, lombok
-* Deploy : Github Actions, AWS EC2(Elastic IP)
+### 팀
+`MVP(Minimum Viable Product)` 방식으로 개발/배포를 진행하며, 기술 자체보다 사용자의 니즈 충족 및 사업성에 가치를 둡니다. 먹어보시개 팀은 대구소프트웨어마이스터고 내에서 조직된 팀입니다.
+
+|               |            Server             |                 Front-end                  |                   Android                   |   iOS   | Design  |
+|:-------------:|:-----------------------------:|:------------------------------------------:|:-------------------------------------------:|:-------:|:-------:|
+|    People     |         우준성 (Leader)          |               임동현, 강보민, 김성주                |                김태환                          |   이석호   |   김영성   |
+|    Skills     | SpringBoot (Java), JPA, MySQL | React, TypeScript, React-query, Recoil | Kotlin, Clean Architecture, MVVM, Retrofit2 | SwiftUI |         |
+| Develop Tools |         Intellij IDEA         |             Visual Studio Code             |               Android Studio                |  XCode  |  Figma  |
+
+### 서버 상세 기술 스택
+* Backend : SpringBoot (Java), JPA, lombok, JWT
+* Deploy : Github Actions, Docker, AWS EC2(Elastic IP)
 * DB : MySQL, AWS RDS
 
 ### Commit 규칙
 
+#### Commit Template
 `git commit template`을 사용하여 커밋 규칙을 강제합니다. (./.gitmessage)
 
-#### 기본 형식
+아래 명령어로 템플릿 파일을 설정해놓으면 `git commit` 명령어를 통해 Vim에서 템플릿 메시지 조회/커밋을 실행할 수 있습니다.
+
+```
+git config --global commit.template .gitmessage.txt
+```
+
+#### Commit 기본 형식
 
 ```
 (gitmoji) :: 구체적인 커밋 메시지
