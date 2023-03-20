@@ -4,6 +4,7 @@ import com.eatitdog.eatitdog.domain.food.domain.Food;
 import com.eatitdog.eatitdog.domain.food.enums.FoodType;
 import com.eatitdog.eatitdog.domain.food.presentation.dto.response.FoodNameResponse;
 import com.eatitdog.eatitdog.domain.food.service.FoodService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,7 @@ public class FoodController {
 
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "음식 검색", notes = "keyword(음식 이름 포함) 및 type(음식 종류)를 query parameter로 받아서 음식 검색을 처리합니다. keyword, type 둘 다 필수 값이 아니지만, 둘 다 비우게 되면 페이징 없는 GET All API가 되므로 용도에 맞게 사용해주세요.")
     public List<Food> searchFoods(
             @RequestParam(required = false, defaultValue = "") String keyword,
             @RequestParam(required = false, defaultValue = "") String type
