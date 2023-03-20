@@ -31,7 +31,7 @@ public class FoodController {
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.OK)
     public List<Food> searchFoods(
-            @RequestParam String keyword,
+            @RequestParam(required = false, defaultValue = "") String keyword,
             @RequestParam(required = false, defaultValue = "") String type
     ) {
         return foodService.getFoodsByKeywordAndType(keyword, type);
