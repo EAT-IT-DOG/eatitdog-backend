@@ -24,7 +24,7 @@
 
 ### 서버 상세 기술 스택
 * Backend : SpringBoot (Java), JPA, lombok, JWT
-* Deploy : Github Actions, Docker, AWS EC2(Elastic IP)
+* Deploy : Github Actions, Docker, AWS Route 53, ALB, EC2
 * DB : MySQL, AWS RDS
 
 ### Commit 규칙
