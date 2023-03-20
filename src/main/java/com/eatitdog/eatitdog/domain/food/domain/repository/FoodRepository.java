@@ -14,6 +14,7 @@ public interface FoodRepository extends JpaRepository<Food, Integer> {
 
     List<Food> findAllByType(FoodType type);
     List<Food> findTop18ByOrderBySearchCountDesc();
+    List<Food> findAllByNameContains(String name);
     Optional<Food> findByName(String name);
 
     @Query(value = "SELECT * FROM eatitdog.food order by RAND() limit 1", nativeQuery = true)

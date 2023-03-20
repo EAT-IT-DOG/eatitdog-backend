@@ -13,13 +13,23 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Response> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
         String message = e.getBindingResult()
                 .getAllErrors()
                 .get(0)
                 .getDefaultMessage();
         return new ResponseEntity<>(
-                new Response(HttpStatus.BAD_REQUEST, message),
-                HttpStatus.BAD_REQUEST
+                new Response(status, message),
+                status
+        );
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Response> handleIllegalArgumentException(IllegalArgumentException e) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        return new ResponseEntity<>(
+                new Response(status, e.getMessage()),
+                status
         );
     }
 
@@ -33,10 +43,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpServerErrorException.InternalServerError.class)
     public ResponseEntity<Response> handleException(Exception e) {
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         e.printStackTrace();
         return new ResponseEntity<>(
-                new Response(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()),
-                HttpStatus.INTERNAL_SERVER_ERROR
+                new Response(status, e.getMessage()),
+                status
         );
     }
 }

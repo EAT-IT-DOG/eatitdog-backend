@@ -9,6 +9,7 @@ import com.eatitdog.eatitdog.global.annotation.ServiceWithTransactionalReadOnly;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +23,16 @@ public class FoodService {
     public List<Food> getFoodsByPaging(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
         return foodRepository.findAll(pageRequest).getContent();
+    }
+
+    public List<Food> getFoodsByKeywordAndType(String keyword, String type) {
+        List<Food> foodList = foodRepository.findAllByNameContains(keyword);
+        if (StringUtils.hasText(type)) {
+            foodList = foodList.stream()
+                    .filter(food -> food.getType().equals(FoodType.valueOf(type)))
+                    .collect(Collectors.toList());
+        }
+        return foodList;
     }
 
     public List<FoodNameResponse> getFoodsBySearchCount() {

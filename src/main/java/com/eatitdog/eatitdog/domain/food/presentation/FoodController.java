@@ -28,6 +28,15 @@ public class FoodController {
         return foodService.getFoodsByPaging(page, size);
     }
 
+    @GetMapping("/search")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Food> searchFoods(
+            @RequestParam String keyword,
+            @RequestParam(required = false, defaultValue = "") String type
+    ) {
+        return foodService.getFoodsByKeywordAndType(keyword, type);
+    }
+
     @GetMapping("/ranking")
     @ResponseStatus(HttpStatus.OK)
     public List<FoodNameResponse> getFoodsBySearchCount() {
@@ -36,7 +45,7 @@ public class FoodController {
 
     @GetMapping("/type")
     @ResponseStatus(HttpStatus.OK)
-    public List<FoodNameResponse> getFoodNameByType(@RequestParam("type") FoodType type) {
+    public List<FoodNameResponse> getFoodNamesByType(@RequestParam("type") FoodType type) {
         return foodService.getFoodNameByType(type);
     }
 
