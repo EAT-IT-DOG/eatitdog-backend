@@ -5,7 +5,7 @@ import com.eatitdog.eatitdog.domain.user.enums.UserStatus;
 import com.eatitdog.eatitdog.domain.user.exception.UserDeactivatedException;
 import com.eatitdog.eatitdog.global.annotation.AuthorizationCheck;
 import com.eatitdog.eatitdog.global.exception.global.CredentialsNotFoundException;
-import com.eatitdog.eatitdog.global.lib.jwt.Jwt;
+import com.eatitdog.eatitdog.global.lib.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -18,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 @RequiredArgsConstructor
 public class AuthInterceptor implements HandlerInterceptor {
 
-    private final Jwt jwt;
+    private final JwtProvider jwt;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
         if(!(handler instanceof HandlerMethod)) {
             return true;

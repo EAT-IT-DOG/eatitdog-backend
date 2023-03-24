@@ -11,7 +11,7 @@ import com.eatitdog.eatitdog.domain.user.exception.PasswordNotMatchException;
 import com.eatitdog.eatitdog.domain.user.exception.UserDeactivatedException;
 import com.eatitdog.eatitdog.domain.user.exception.UserNotFoundException;
 import com.eatitdog.eatitdog.global.annotation.ServiceWithTransactionalReadOnly;
-import com.eatitdog.eatitdog.global.lib.jwt.Jwt;
+import com.eatitdog.eatitdog.global.lib.jwt.JwtProvider;
 import com.eatitdog.eatitdog.global.lib.encrypt.Encrypt;
 import com.eatitdog.eatitdog.global.lib.jwt.JwtType;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final Encrypt encrypt;
-    private final Jwt jwt;
+    private final JwtProvider jwt;
 
     @Transactional(rollbackFor = Exception.class)
     public void join(CreateUserRequest request) {

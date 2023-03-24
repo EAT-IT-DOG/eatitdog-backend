@@ -1,6 +1,6 @@
 package com.eatitdog.eatitdog.domain.token.presentation;
 
-import com.eatitdog.eatitdog.global.lib.jwt.Jwt;
+import com.eatitdog.eatitdog.global.lib.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import javax.validation.Valid;
 @RequestMapping("/token")
 public class TokenController {
 
-    private final Jwt jwt;
+    private final JwtProvider jwt;
 
     @PostMapping("/refresh")
     @ResponseStatus(HttpStatus.OK)

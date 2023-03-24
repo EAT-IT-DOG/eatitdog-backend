@@ -43,5 +43,5 @@ cloud:
 
 jwt:
   secret:
-    access: ${JWT_ACCESS_SECRET}
-    refresh: ${JWT_REFRESH_SECRET}
+    access-key: ${JWT_ACCESS_SECRET}
+    refresh-key: ${JWT_REFRESH_SECRET}
