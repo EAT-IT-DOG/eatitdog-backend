@@ -62,7 +62,7 @@ public class FoodService {
                 .collect(Collectors.toList());
     }
 
-    @Cacheable(value = "foodByNameCacheStore", key = "#name")
+    @Cacheable(value = "foodByNameCaching", key = "#name")
     @Transactional(rollbackFor = Exception.class)
     public Food getFoodByName(String name) {
         Food food = foodRepository.findByName(name)
