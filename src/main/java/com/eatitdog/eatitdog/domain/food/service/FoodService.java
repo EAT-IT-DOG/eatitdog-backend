@@ -7,13 +7,12 @@ import com.eatitdog.eatitdog.domain.food.exception.FoodNotFoundException;
 import com.eatitdog.eatitdog.domain.food.presentation.dto.response.FoodNameResponse;
 import com.eatitdog.eatitdog.global.annotation.ServiceWithTransactionalReadOnly;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.yaml.snakeyaml.util.ArrayUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,6 +62,7 @@ public class FoodService {
                 .collect(Collectors.toList());
     }
 
+    @Cacheable(value = "foodByNameCacheStore", key = "#name")
     @Transactional(rollbackFor = Exception.class)
     public Food getFoodByName(String name) {
         Food food = foodRepository.findByName(name)
