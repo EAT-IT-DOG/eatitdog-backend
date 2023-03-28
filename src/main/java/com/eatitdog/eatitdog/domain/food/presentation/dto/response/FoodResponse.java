@@ -3,6 +3,7 @@ package com.eatitdog.eatitdog.domain.food.presentation.dto.response;
 import com.eatitdog.eatitdog.domain.food.domain.Food;
 import com.eatitdog.eatitdog.domain.food.enums.FoodSafeness;
 import com.eatitdog.eatitdog.domain.food.enums.FoodType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
@@ -11,6 +12,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +32,12 @@ public class FoodResponse implements Serializable {
     private String caution;
     private long searchCount;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdDateTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime modifiedDateTime;
+
     public static FoodResponse entityToResponse(Food food) {
         return FoodResponse.builder()
                 .id(food.getId())
@@ -41,6 +49,8 @@ public class FoodResponse implements Serializable {
                 .benefit(food.getBenefit())
                 .caution(food.getCaution())
                 .searchCount(food.getSearchCount())
+                .createdDateTime(food.getCreatedDateTime())
+                .modifiedDateTime(food.getModifiedDateTime())
                 .build();
     }
 
