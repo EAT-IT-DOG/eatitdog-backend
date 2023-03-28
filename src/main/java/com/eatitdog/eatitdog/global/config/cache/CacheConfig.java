@@ -1,44 +1,60 @@
 package com.eatitdog.eatitdog.global.config.cache;
 
-import net.sf.ehcache.Cache;
+import com.eatitdog.eatitdog.global.properties.RedisProperties;
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.ehcache.EhCacheCacheManager;
-import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import net.sf.ehcache.config.CacheConfiguration;
+import org.springframework.data.redis.cache.CacheKeyPrefix;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import java.util.Objects;
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableCaching
+@RequiredArgsConstructor
 public class CacheConfig {
 
-    private static final int EXPIRE_SECONDS = 86400; // 1 day
+    private final RedisProperties redisProp;
+    private static final int DEFAULT_EXPIRE_SECONDS = 86400; // 1 day
 
     @Bean
-    public EhCacheManagerFactoryBean ehCacheManagerFactoryBean() {
-        EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
-        ehCacheManagerFactoryBean.setShared(true);
-        return ehCacheManagerFactoryBean;
+    public RedisConnectionFactory redisConnectionFactory() {
+        return new LettuceConnectionFactory(redisProp.getHost(), redisProp.getPort());
     }
 
     @Bean
-    public EhCacheCacheManager ehCacheCacheManager() {
-        CacheConfiguration dataCacheConfig = new CacheConfiguration()
-                .eternal(false)
-                .timeToIdleSeconds(0)
-                .timeToLiveSeconds(EXPIRE_SECONDS)
-                .maxEntriesLocalHeap(1000)
-                .maxElementsOnDisk(1000)
-                .memoryStoreEvictionPolicy("LRU")
-                .name("foodByNameCaching");
+    public RedisTemplate<String, Object> redisTemplate() {
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(redisConnectionFactory());
+        return redisTemplate;
+    }
 
-        Cache dataCache = new Cache(dataCacheConfig);
-        Objects.requireNonNull(ehCacheManagerFactoryBean().getObject())
-                .addCache(dataCache);
-        return new EhCacheCacheManager(
-                Objects.requireNonNull(ehCacheManagerFactoryBean().getObject())
-        );
+    @Bean(name = "cacheManager")
+    public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
+        RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
+                .disableCachingNullValues()
+                .entryTtl(Duration.ofSeconds(DEFAULT_EXPIRE_SECONDS))
+                .computePrefixWith(CacheKeyPrefix.simple())
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()));
+
+        Map<String, RedisCacheConfiguration> cacheConfigurations = new HashMap<>();
+        cacheConfigurations.put("foodByNameCaching", RedisCacheConfiguration.defaultCacheConfig());
+        cacheConfigurations.put("foodsBySearchCountCaching", RedisCacheConfiguration.defaultCacheConfig());
+        cacheConfigurations.put("foodNamesByTypeCaching", RedisCacheConfiguration.defaultCacheConfig());
+
+        return RedisCacheManager.RedisCacheManagerBuilder
+                .fromConnectionFactory(connectionFactory)
+                .cacheDefaults(configuration)
+                .withInitialCacheConfigurations(cacheConfigurations)
+                .build();
     }
 }

@@ -23,6 +23,9 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
 
 logging:
   level:

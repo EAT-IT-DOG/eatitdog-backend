@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 @Configuration
 @ConfigurationProperties(prefix = "jwt.secret")
-public class JwtConfiguration {
+public class JwtProperties {
     private String accessKey;
     private String refreshKey;
 }
