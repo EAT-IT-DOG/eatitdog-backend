@@ -5,7 +5,7 @@ import com.eatitdog.eatitdog.domain.user.domain.repository.UserRepository;
 import com.eatitdog.eatitdog.domain.user.exception.UserNotFoundException;
 import com.eatitdog.eatitdog.global.exception.global.InvalidTokenException;
 import com.eatitdog.eatitdog.global.lib.encrypt.Encrypt;
-import com.eatitdog.eatitdog.global.properties.JwtConfiguration;
+import com.eatitdog.eatitdog.global.properties.JwtProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -24,7 +24,7 @@ public class JwtProvider {
 
     private final Encrypt encrypt;
     private final UserRepository userRepository;
-    private final JwtConfiguration jwtConfiguration;
+    private final JwtProperties jwtConfiguration;
 
     private static final String REQUEST_HEADER = "Authorization";
 

@@ -44,7 +44,7 @@ public class Food extends BaseTime {
 
     private long searchCount;
 
-    public void increaseCount() {
+    public void increaseSearchCount() {
         searchCount++;
     }
 

@@ -6,10 +6,12 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.io.Serializable;
+
 @Getter
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @AllArgsConstructor
-public class FoodNameResponse {
+public class FoodNameResponse implements Serializable {
 
     private String name;
     private FoodSafeness safeness;

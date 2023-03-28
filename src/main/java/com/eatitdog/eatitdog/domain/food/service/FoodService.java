@@ -5,11 +5,11 @@ import com.eatitdog.eatitdog.domain.food.enums.FoodType;
 import com.eatitdog.eatitdog.domain.food.domain.repository.FoodRepository;
 import com.eatitdog.eatitdog.domain.food.exception.FoodNotFoundException;
 import com.eatitdog.eatitdog.domain.food.presentation.dto.response.FoodNameResponse;
+import com.eatitdog.eatitdog.domain.food.presentation.dto.response.FoodResponse;
 import com.eatitdog.eatitdog.global.annotation.ServiceWithTransactionalReadOnly;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -22,12 +22,12 @@ public class FoodService {
 
     private final FoodRepository foodRepository;
 
-    public List<Food> getFoodsByPaging(int page, int size) {
+    public List<FoodResponse> getFoodsByPaging(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
-        return foodRepository.findAll(pageRequest).getContent();
+        return FoodResponse.entityListToResponse(foodRepository.findAll(pageRequest).getContent());
     }
 
-    public List<Food> getFoodsByKeywordAndType(String keyword, String type, int page, int size) {
+    public List<FoodResponse> getFoodsByKeywordAndType(String keyword, String type, int page, int size) {
         List<Food> foodList = foodRepository.findAllByNameContainsOrderBySearchCountDesc(keyword);
         if (StringUtils.hasText(type)) {
             foodList = foodList.stream()
@@ -45,9 +45,11 @@ public class FoodService {
         if (endPageIndex > foodList.size()) {
             endPageIndex = foodList.size() - 1;
         }
-        return foodList.subList(startPageIndex, endPageIndex + 1);
+
+        return FoodResponse.entityListToResponse(foodList.subList(startPageIndex, endPageIndex + 1));
     }
 
+    @Cacheable(value = "foodsBySearchCountCaching")
     public List<FoodNameResponse> getFoodsBySearchCount() {
         return foodRepository.findTop18ByOrderBySearchCountDesc()
                 .stream()
@@ -55,6 +57,7 @@ public class FoodService {
                 .collect(Collectors.toList());
     }
 
+    @Cacheable(value = "foodNamesByTypeCaching", key = "#type")
     public List<FoodNameResponse> getFoodNameByType(FoodType type) {
         return foodRepository.findAllByType(type)
                 .stream()
@@ -63,16 +66,15 @@ public class FoodService {
     }
 
     @Cacheable(value = "foodByNameCaching", key = "#name")
-    @Transactional(rollbackFor = Exception.class)
-    public Food getFoodByName(String name) {
+    public FoodResponse getFoodByName(String name) {
         Food food = foodRepository.findByName(name)
                 .orElseThrow(() -> FoodNotFoundException.EXCEPTION);
-        food.increaseCount();
-        return foodRepository.save(food);
+        return FoodResponse.entityToResponse(food);
     }
 
-    public Food getFoodByRandom() {
-        return foodRepository.findByRandom()
+    public FoodResponse getFoodByRandom() {
+        Food food = foodRepository.findByRandom()
                 .get(0);
+        return FoodResponse.entityToResponse(food);
     }
 }
