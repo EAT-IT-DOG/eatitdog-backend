@@ -3,7 +3,7 @@ package com.eatitdog.eatitdog.domain.dog.domain;
 import com.eatitdog.eatitdog.domain.dog.enums.Sex;
 import com.eatitdog.eatitdog.domain.dog.exception.DogNotOwnerException;
 import com.eatitdog.eatitdog.domain.user.domain.User;
-import com.eatitdog.eatitdog.global.jpa.BaseTime;
+import com.eatitdog.eatitdog.global.jpa.BaseTimeEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @Table(name = "dog")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Dog extends BaseTime {
+public class Dog extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

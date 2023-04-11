@@ -2,7 +2,7 @@ package com.eatitdog.eatitdog.domain.food.domain;
 
 import com.eatitdog.eatitdog.domain.food.enums.FoodSafeness;
 import com.eatitdog.eatitdog.domain.food.enums.FoodType;
-import com.eatitdog.eatitdog.global.jpa.BaseTime;
+import com.eatitdog.eatitdog.global.jpa.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "food")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Food extends BaseTime {
+public class Food extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

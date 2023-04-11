@@ -1,6 +1,6 @@
 package com.eatitdog.eatitdog.domain.dog.domain;
 
-import com.eatitdog.eatitdog.global.jpa.BaseTime;
+import com.eatitdog.eatitdog.global.jpa.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "breed")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Breed extends BaseTime {
+public class Breed extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

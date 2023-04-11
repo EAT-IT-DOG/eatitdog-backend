@@ -2,7 +2,7 @@ package com.eatitdog.eatitdog.domain.user.domain;
 
 import com.eatitdog.eatitdog.domain.user.enums.UserStatus;
 import com.eatitdog.eatitdog.domain.user.exception.PasswordNotMatchException;
-import com.eatitdog.eatitdog.global.jpa.BaseTime;
+import com.eatitdog.eatitdog.global.jpa.BaseTimeEntity;
 import com.eatitdog.eatitdog.global.lib.encrypt.Encrypt;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicInsert
-public class User extends BaseTime {
+public class User extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
