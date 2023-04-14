@@ -1,4 +1,4 @@
-name: Spring Boot & Gradle & Docker & EC2 CD
+name: CD with Gradle & Docker & EC2
 
 on:
   push:
