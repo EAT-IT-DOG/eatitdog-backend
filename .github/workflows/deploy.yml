@@ -1,9 +1,10 @@
-name: CD with Gradle & Docker & EC2
+name: CI/CD with Gradle & Docker & EC2
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 permissions:
   contents: read
@@ -57,6 +58,13 @@ jobs:
       # Gradle 빌드
       - name: Build with Gradle
         run: ./gradlew bootJar
+
+      - name: Upload Jacoco Report
+          if: ${{ failure() }}
+          uses: actions/upload-artifact@v3
+          with:
+            name: jacoco-report
+            path: build/reports/jacoco/test/html
 
       # Spring 어플리케이션 Docker Image 빌드
       - name: Build Docker Image For Spring
