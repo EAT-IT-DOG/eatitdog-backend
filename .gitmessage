@@ -12,10 +12,11 @@ type :: description
 # ⚡️ :zap:                   코드 성능 개선
 # 🔥 :fire:                  코드 삭제 (파일 삭제)
 # 📄 :page_facing_up:        문서 작성 및 변경
-# 🔧 :wrench: Configuration  파일 변경/의존성 추가 및 삭제
+# 🔧 :wrench:                Configuration 파일 변경/의존성 추가 및 삭제
 # 👷 :construction_worker:   CI/CD 시스템 추가 혹은 수정
 # 🐛 :bug:                   버그 수정
 # ✅ :white_check_mark:      테스트 케이스 작성 및 수정
 # ⏪ :rewind:                작업 되돌리기
 # 🚑 :ambulance:             긴급 수정
+# 🔒️ :lock:                  보안 사항 수정/개선
 # 🙈 :see_no_evil:           .gitignore 추가/수정
