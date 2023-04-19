@@ -48,3 +48,6 @@ jwt:
   secret:
     access-key: ${JWT_ACCESS_SECRET}
     refresh-key: ${JWT_REFRESH_SECRET}
+
+api:
+  key: ${API_KEY}

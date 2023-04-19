@@ -1,5 +1,6 @@
 package com.eatitdog.eatitdog.global.config.webmvc;
 
+import com.eatitdog.eatitdog.global.interceptor.APIKeyInterceptor;
 import com.eatitdog.eatitdog.global.interceptor.AuthInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -8,20 +9,14 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import static com.eatitdog.eatitdog.global.statics.ClasspathResourceLocations.CLASSPATH_RESOURCE_LOCATIONS;
+
 @Configuration
 @RequiredArgsConstructor
 public class WebMvcConfig implements WebMvcConfigurer {
 
+    private final APIKeyInterceptor apiKeyInterceptor;
     private final AuthInterceptor authInterceptor;
-
-    private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
-            "classpath:/static/",
-            "classpath:/public/",
-            "classpath:/",
-            "classpath:/resources/",
-            "classpath:/META-INF/resources/",
-            "classpath:/META-INF/resources/webjars/"
-    };
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -30,10 +25,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+
+        registry.addInterceptor(apiKeyInterceptor)
+                .addPathPatterns("/food/**");
+
         registry.addInterceptor(authInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/swagger-ui/**")
-                .excludePathPatterns("/static/**");
+                .excludePathPatterns("/swagger-ui/**", "/static/**");
     }
 
     @Override
