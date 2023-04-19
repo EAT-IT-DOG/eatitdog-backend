@@ -50,6 +50,7 @@ public class CacheConfig {
         cacheConfigurations.put("foodByNameCaching", RedisCacheConfiguration.defaultCacheConfig());
         cacheConfigurations.put("foodsBySearchCountCaching", RedisCacheConfiguration.defaultCacheConfig());
         cacheConfigurations.put("foodNamesByTypeCaching", RedisCacheConfiguration.defaultCacheConfig());
+        cacheConfigurations.put("foodTypesCaching", RedisCacheConfiguration.defaultCacheConfig());
 
         return RedisCacheManager.RedisCacheManagerBuilder
                 .fromConnectionFactory(connectionFactory)

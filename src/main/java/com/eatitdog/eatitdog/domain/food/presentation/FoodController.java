@@ -59,6 +59,11 @@ public class FoodController {
         return foodService.getFoodByName(name);
     }
 
+    @GetMapping("/types")
+    public List<String> getFoodTypes() {
+        return foodService.getFoodTypes();
+    }
+
     @GetMapping("/random")
     @ResponseStatus(HttpStatus.OK)
     public FoodResponse getRandomFood() {

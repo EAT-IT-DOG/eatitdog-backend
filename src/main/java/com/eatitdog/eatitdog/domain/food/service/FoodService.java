@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @ServiceWithTransactionalReadOnly
 @RequiredArgsConstructor
@@ -70,6 +71,11 @@ public class FoodService {
         Food food = foodRepository.findByName(name)
                 .orElseThrow(() -> FoodNotFoundException.EXCEPTION);
         return FoodResponse.entityToResponse(food);
+    }
+
+    @Cacheable(value = "foodTypesCaching")
+    public List<String> getFoodTypes() {
+        return Stream.of(FoodType.values()).map(Enum::name).collect(Collectors.toList());
     }
 
     public FoodResponse getFoodByRandom() {
