@@ -1,6 +1,7 @@
 package com.eatitdog.eatitdog.global.exception;
 
 import com.eatitdog.eatitdog.global.response.Response;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -8,8 +9,18 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpServerErrorException;
 
+import javax.validation.ConstraintViolationException;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<Response> handleCustomException(CustomException e) {
+        return new ResponseEntity<>(
+                new Response(e.getStatus(), e.getMessage()),
+                e.getStatus()
+        );
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Response> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
@@ -33,11 +44,21 @@ public class GlobalExceptionHandler {
         );
     }
 
-    @ExceptionHandler(CustomException.class)
-    public ResponseEntity<Response> handleCustomException(CustomException e) {
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Response> handleConstraintViolationException(ConstraintViolationException e) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
         return new ResponseEntity<>(
-                new Response(e.getStatus(), e.getMessage()),
-                e.getStatus()
+                new Response(status, e.getMessage()),
+                status
+        );
+    }
+
+    @ExceptionHandler(DataAccessException.class)
+    public ResponseEntity<Response> handleDataAccessException(DataAccessException e) {
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        return new ResponseEntity<>(
+                new Response(status, "데이터 무결성 위반 " + e.getMessage()),
+                status
         );
     }
 
