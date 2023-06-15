@@ -13,6 +13,7 @@ import com.eatitdog.eatitdog.global.infra.RestRequest;
 import com.eatitdog.eatitdog.global.lib.JsonStringToObjectMapper;
 import com.eatitdog.eatitdog.global.properties.OpenAPIProperties;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -38,7 +39,8 @@ public class ProductService {
         return JsonStringToObjectMapper.convert(response, ProductAPIDto.class);
     }
 
-    public ProductAPIDto getProductByName(String productName) {
+    @Cacheable(value = "externalProductByProductNameCaching", key = "#productName")
+    public ProductAPIDto getExternalProductByName(String productName) {
         String url = getOpenAPIDefaultUriBuilder()
                 .queryParam("prdlstNm", URLEncoder.encode(productName, StandardCharsets.UTF_8))
                 .build().toUriString();
@@ -46,6 +48,7 @@ public class ProductService {
         return JsonStringToObjectMapper.convert(response, ProductAPIDto.class);
     }
 
+    @Cacheable(value = "productListByFoodCaching", key = "#foodName")
     public List<Product> getProductListByFood(String foodName) {
         Food food = foodRepository.findByName(foodName)
                 .orElseThrow(() -> FoodNotFoundException.EXCEPTION);

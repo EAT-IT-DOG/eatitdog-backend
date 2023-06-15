@@ -24,10 +24,10 @@ public class ProductController {
         return productService.getExternalProductList(page, size);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/external-search")
     @Operation(summary = "get product list from Open API searching with name of product")
-    public ProductAPIDto searchProduct(@RequestParam String name) {
-        return productService.getProductByName(name);
+    public ProductAPIDto searchExternalProduct(@RequestParam String name) {
+        return productService.getExternalProductByName(name);
     }
 
     @GetMapping("/food")
