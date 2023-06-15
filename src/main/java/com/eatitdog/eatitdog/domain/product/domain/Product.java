@@ -36,12 +36,15 @@ public class Product extends BaseTimeEntity {
     @Column(length = 100)
     private String image;
 
+    @Column(length = 50)
+    private String barcode;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = true, name = "fk_food_id")
     private Food food;
 
     @Builder
-    public Product(String id, String name, String rawMaterials, String allergy, String kind, String capacity, String image) {
+    public Product(String id, String name, String rawMaterials, String allergy, String kind, String capacity, String image, String barcode, Food food) {
         this.id = id;
         this.name = name;
         this.rawMaterials = rawMaterials;
@@ -49,5 +52,7 @@ public class Product extends BaseTimeEntity {
         this.kind = kind;
         this.capacity = capacity;
         this.image = image;
+        this.barcode = barcode;
+        this.food = food;
     }
 }

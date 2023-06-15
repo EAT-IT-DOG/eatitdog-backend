@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface FoodRepository extends JpaRepository<Food, Integer> {
+public interface FoodRepository extends JpaRepository<Food, Long> {
 
     List<Food> findAllByType(FoodType type);
     List<Food> findTop18ByOrderBySearchCountDesc();
