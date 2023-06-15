@@ -50,8 +50,8 @@ jwt:
     refresh-key: ${JWT_REFRESH_SECRET}
 
 api:
-  base-url: http://apis.data.go.kr/B553748/CertImgListService/getCertImgListService
   key: ${API_KEY}
 
 open-api:
   key: ${OPEN_API_KEY}
+  base-url: http://apis.data.go.kr/B553748/CertImgListService/getCertImgListService
