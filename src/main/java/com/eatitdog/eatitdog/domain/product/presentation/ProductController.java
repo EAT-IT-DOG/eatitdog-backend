@@ -30,7 +30,7 @@ public class ProductController {
         return productService.getProductByName(name);
     }
 
-    @GetMapping("/")
+    @GetMapping("/food")
     @Operation(summary = "get product list from DB")
     public List<Product> getProductListByFood(@RequestParam String name) {
         return productService.getProductListByFood(name);

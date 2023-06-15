@@ -6,6 +6,7 @@ import com.eatitdog.eatitdog.domain.food.exception.FoodNotFoundException;
 import com.eatitdog.eatitdog.domain.product.domain.Product;
 import com.eatitdog.eatitdog.domain.product.domain.repository.ProductRepository;
 import com.eatitdog.eatitdog.domain.product.exception.ExternalProductNotFoundException;
+import com.eatitdog.eatitdog.domain.product.exception.ProductAlreadyExistsException;
 import com.eatitdog.eatitdog.domain.product.presentation.dto.api.ProductAPIDto;
 import com.eatitdog.eatitdog.global.annotation.ServiceWithTransactionalReadOnly;
 import com.eatitdog.eatitdog.global.infra.RestRequest;
@@ -13,6 +14,7 @@ import com.eatitdog.eatitdog.global.lib.JsonStringToObjectMapper;
 import com.eatitdog.eatitdog.global.properties.OpenAPIProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -28,13 +30,18 @@ public class ProductService {
     private final RestRequest restRequest;
 
     public ProductAPIDto getExternalProductList(int page, int size) {
-        String url = openApiProperties.getBaseUrl() + "?returnType=json&ServiceKey=" + openApiProperties.getKey() + "&pageNo=" + page + "&numOfRows=" + size;
+        String url = getOpenAPIDefaultUriBuilder()
+                .queryParam("pageNo", page)
+                .queryParam("numOfRows", size)
+                .build().toUriString();
         String response = restRequest.get(url, String.class);
         return JsonStringToObjectMapper.convert(response, ProductAPIDto.class);
     }
 
     public ProductAPIDto getProductByName(String productName) {
-        String url = openApiProperties.getBaseUrl() + "?returnType=json&ServiceKey=" + openApiProperties.getKey() + "&prdlstNm=" + URLEncoder.encode(productName, StandardCharsets.UTF_8);
+        String url = getOpenAPIDefaultUriBuilder()
+                .queryParam("prdlstNm", URLEncoder.encode(productName, StandardCharsets.UTF_8))
+                .build().toUriString();
         String response = restRequest.get(url, String.class);
         return JsonStringToObjectMapper.convert(response, ProductAPIDto.class);
     }
@@ -48,12 +55,18 @@ public class ProductService {
     // productId는 Open API의 품목보고번호 (prdlstReportNo)
     @Transactional(rollbackFor = Exception.class)
     public void mapProductAndFood(String productId, long foodId) {
-        String url = openApiProperties.getBaseUrl() + "?returnType=json&ServiceKey=" + openApiProperties.getKey() + "&prdlstReportNo=" + productId;
+        String url = getOpenAPIDefaultUriBuilder()
+                .queryParam("prdlstReportNo", productId)
+                .build().toUriString();
         String response = restRequest.get(url, String.class);
         ProductAPIDto dto = JsonStringToObjectMapper.convert(response, ProductAPIDto.class);
 
         if (dto.getBody().getItems().isEmpty()) {
             throw ExternalProductNotFoundException.EXCEPTION;
+        }
+
+        if (productRepository.existsById(productId)) {
+            throw ProductAlreadyExistsException.EXCEPTION;
         }
 
         Food food = foodRepository.findById(foodId)
@@ -72,5 +85,12 @@ public class ProductService {
                 .food(food)
                 .build();
         productRepository.save(product);
+    }
+
+    private UriComponentsBuilder getOpenAPIDefaultUriBuilder() {
+        return UriComponentsBuilder
+                .fromUriString(openApiProperties.getBaseUrl())
+                .queryParam("returnType", "json")
+                .queryParam("ServiceKey", openApiProperties.getKey());
     }
 }
