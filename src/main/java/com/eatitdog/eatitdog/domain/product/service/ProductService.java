@@ -7,6 +7,7 @@ import com.eatitdog.eatitdog.domain.product.domain.Product;
 import com.eatitdog.eatitdog.domain.product.domain.repository.ProductRepository;
 import com.eatitdog.eatitdog.domain.product.exception.ExternalProductNotFoundException;
 import com.eatitdog.eatitdog.domain.product.exception.ProductAlreadyExistsException;
+import com.eatitdog.eatitdog.domain.product.exception.ProductNotFoundException;
 import com.eatitdog.eatitdog.domain.product.presentation.dto.api.ProductAPIDto;
 import com.eatitdog.eatitdog.global.annotation.ServiceWithTransactionalReadOnly;
 import com.eatitdog.eatitdog.global.infra.RestRequest;
@@ -55,6 +56,11 @@ public class ProductService {
         return productRepository.findAllByFood(food);
     }
 
+    public Product getProductByBarcode(String barcode) {
+        return productRepository.findByBarcode(barcode)
+                .orElseThrow(() -> ProductNotFoundException.EXCEPTION);
+    }
+
     // productId는 Open API의 품목보고번호 (prdlstReportNo)
     @Transactional(rollbackFor = Exception.class)
     public void mapProductAndFood(String productId, long foodId) {
@@ -96,4 +102,6 @@ public class ProductService {
                 .queryParam("returnType", "json")
                 .queryParam("ServiceKey", openApiProperties.getKey());
     }
+
+
 }

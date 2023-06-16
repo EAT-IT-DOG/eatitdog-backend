@@ -26,14 +26,20 @@ public class ProductController {
 
     @GetMapping("/external-search")
     @Operation(summary = "get product list from Open API searching with name of product")
-    public ProductAPIDto searchExternalProduct(@RequestParam String name) {
+    public ProductAPIDto searchExternalProduct(@PathVariable String name) {
         return productService.getExternalProductByName(name);
     }
 
     @GetMapping("/food")
     @Operation(summary = "get product list from DB")
-    public List<Product> getProductListByFood(@RequestParam String name) {
+    public List<Product> getProductListByFood(@PathVariable String name) {
         return productService.getProductListByFood(name);
+    }
+
+    @GetMapping("/barcode")
+    @Operation(summary = "get product by barcode number")
+    public Product getProductByBarcode(@PathVariable String barcode) {
+        return productService.getProductByBarcode(barcode);
     }
 
     @PostMapping
