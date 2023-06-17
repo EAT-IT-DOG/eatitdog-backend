@@ -5,7 +5,7 @@ import com.eatitdog.eatitdog.domain.auth.presentation.dto.response.LoginTokenRes
 import com.eatitdog.eatitdog.domain.auth.service.AuthService;
 import com.eatitdog.eatitdog.domain.auth.presentation.dto.request.CreateUserRequest;
 import com.eatitdog.eatitdog.domain.user.domain.User;
-import com.eatitdog.eatitdog.global.annotation.AuthorizationCheck;
+import com.eatitdog.eatitdog.global.annotation.AuthenticationCheck;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +31,7 @@ public class AuthController {
         return authService.login(request);
     }
 
-    @AuthorizationCheck
+    @AuthenticationCheck
     @DeleteMapping("/unregister")
     @ResponseStatus(HttpStatus.OK)
     public void unregister(@RequestAttribute User user) {

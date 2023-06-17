@@ -4,7 +4,7 @@ import com.eatitdog.eatitdog.domain.dog.domain.Dog;
 import com.eatitdog.eatitdog.domain.dog.presentation.dto.request.CreateDogRequest;
 import com.eatitdog.eatitdog.domain.dog.service.DogService;
 import com.eatitdog.eatitdog.domain.user.domain.User;
-import com.eatitdog.eatitdog.global.annotation.AuthorizationCheck;
+import com.eatitdog.eatitdog.global.annotation.AuthenticationCheck;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class DogController {
     private final DogService dogService;
 
     @GetMapping("/my")
-    @AuthorizationCheck
+    @AuthenticationCheck
     @ResponseStatus(HttpStatus.OK)
     public List<Dog> getMyDogs(
             @RequestAttribute User user
@@ -35,7 +35,7 @@ public class DogController {
     }
 
     @PostMapping
-    @AuthorizationCheck
+    @AuthenticationCheck
     @ResponseStatus(HttpStatus.CREATED)
     public void create(
             @RequestBody @Valid CreateDogRequest request,
@@ -45,7 +45,7 @@ public class DogController {
     }
 
     @DeleteMapping
-    @AuthorizationCheck
+    @AuthenticationCheck
     @ResponseStatus(HttpStatus.OK)
     public void delete(
             @RequestParam long id,

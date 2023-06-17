@@ -5,7 +5,7 @@ import com.eatitdog.eatitdog.domain.user.presentation.dto.request.ChangePassword
 import com.eatitdog.eatitdog.domain.user.presentation.dto.request.UpdateUserRequest;
 import com.eatitdog.eatitdog.domain.user.presentation.dto.response.UserAndDogResponse;
 import com.eatitdog.eatitdog.domain.user.service.UserService;
-import com.eatitdog.eatitdog.global.annotation.AuthorizationCheck;
+import com.eatitdog.eatitdog.global.annotation.AuthenticationCheck;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/myinfo")
-    @AuthorizationCheck
+    @AuthenticationCheck
     @ResponseStatus(HttpStatus.OK)
     public UserAndDogResponse getMyInfo(
             @RequestAttribute User user
@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @PatchMapping("/password")
-    @AuthorizationCheck
+    @AuthenticationCheck
     @ResponseStatus(HttpStatus.OK)
     public void changeMyPassword(
             @RequestBody @Valid ChangePasswordRequest request,
@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @PutMapping
-    @AuthorizationCheck
+    @AuthenticationCheck
     @ResponseStatus(HttpStatus.OK)
     public void updateUserInfo(
             @RequestBody @Valid UpdateUserRequest request,
