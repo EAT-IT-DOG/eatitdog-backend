@@ -1,5 +1,6 @@
 package com.eatitdog.eatitdog.domain.token.presentation;
 
+import com.eatitdog.eatitdog.domain.token.presentation.dto.request.RefreshAccessTokenRequest;
 import com.eatitdog.eatitdog.global.lib.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ public class TokenController {
 
     @PostMapping("/refresh")
     @ResponseStatus(HttpStatus.OK)
-    public String refreshAccessToken(@RequestBody @Valid String refreshToken) {
-        return jwt.refresh(refreshToken);
+    public String refreshAccessToken(@RequestBody @Valid RefreshAccessTokenRequest request) {
+        return jwt.refresh(request.getRefreshToken());
     }
 }

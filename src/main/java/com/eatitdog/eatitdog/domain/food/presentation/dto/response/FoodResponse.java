@@ -4,8 +4,6 @@ import com.eatitdog.eatitdog.domain.food.domain.Food;
 import com.eatitdog.eatitdog.domain.food.enums.FoodSafeness;
 import com.eatitdog.eatitdog.domain.food.enums.FoodType;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +15,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class FoodResponse implements Serializable {

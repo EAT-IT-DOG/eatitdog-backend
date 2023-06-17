@@ -3,8 +3,6 @@ package com.eatitdog.eatitdog.domain.dog.presentation.dto.request;
 import com.eatitdog.eatitdog.domain.dog.domain.Dog;
 import com.eatitdog.eatitdog.domain.dog.enums.Sex;
 import com.eatitdog.eatitdog.global.annotation.EnumValid;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +17,6 @@ import static com.eatitdog.eatitdog.global.statics.ValidMessageConstants.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class CreateDogRequest {
 
     @NotBlank(message = NAME_NOT_BLANK)

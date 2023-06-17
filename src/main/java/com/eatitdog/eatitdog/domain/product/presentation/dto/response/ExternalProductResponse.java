@@ -1,8 +1,6 @@
 package com.eatitdog.eatitdog.domain.product.presentation.dto.response;
 
 import com.eatitdog.eatitdog.domain.product.presentation.dto.api.ProductAPIDto;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class ExternalProductResponse {
