@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.eatitdog.eatitdog.global.statics.CacheConfigKeyConstants.*;
+
 @ServiceWithTransactionalReadOnly
 @RequiredArgsConstructor
 public class FoodService {
@@ -50,7 +52,7 @@ public class FoodService {
         return FoodResponse.entityListToResponse(foodList.subList(startPageIndex, endPageIndex + 1));
     }
 
-    @Cacheable(value = "foodsBySearchCountCaching")
+    @Cacheable(value = FOODS_BY_SEARCH_COUNT)
     public List<FoodNameResponse> getFoodsBySearchCount() {
         return foodRepository.findTop18ByOrderBySearchCountDesc()
                 .stream()
@@ -58,7 +60,7 @@ public class FoodService {
                 .collect(Collectors.toList());
     }
 
-    @Cacheable(value = "foodNamesByTypeCaching", key = "#type")
+    @Cacheable(value = FOOD_NAMES_BY_TYPE, key = "#type")
     public List<FoodNameResponse> getFoodNameByType(FoodType type) {
         return foodRepository.findAllByType(type)
                 .stream()
@@ -66,14 +68,14 @@ public class FoodService {
                 .collect(Collectors.toList());
     }
 
-    @Cacheable(value = "foodByNameCaching", key = "#name")
+    @Cacheable(value = FOOD_BY_NAME, key = "#name")
     public FoodResponse getFoodByName(String name) {
         Food food = foodRepository.findByName(name)
                 .orElseThrow(() -> FoodNotFoundException.EXCEPTION);
         return FoodResponse.entityToResponse(food);
     }
 
-    @Cacheable(value = "foodTypesCaching")
+    @Cacheable(value = FOOD_TYPES)
     public List<String> getFoodTypes() {
         return Stream.of(FoodType.values()).map(Enum::name).collect(Collectors.toList());
     }

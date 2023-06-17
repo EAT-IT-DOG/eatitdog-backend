@@ -18,6 +18,8 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.eatitdog.eatitdog.global.statics.CacheConfigKeyConstants.*;
+
 @Configuration
 @EnableCaching
 @RequiredArgsConstructor
@@ -47,13 +49,13 @@ public class CacheConfig {
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()));
 
         Map<String, RedisCacheConfiguration> cacheConfigurations = new HashMap<>();
-        cacheConfigurations.put("foodByNameCaching", RedisCacheConfiguration.defaultCacheConfig());
-        cacheConfigurations.put("foodsBySearchCountCaching", RedisCacheConfiguration.defaultCacheConfig());
-        cacheConfigurations.put("foodNamesByTypeCaching", RedisCacheConfiguration.defaultCacheConfig());
-        cacheConfigurations.put("foodTypesCaching", RedisCacheConfiguration.defaultCacheConfig());
-        cacheConfigurations.put("externalProductByProductNameCaching", RedisCacheConfiguration.defaultCacheConfig());
-        cacheConfigurations.put("productListByFoodCaching", RedisCacheConfiguration.defaultCacheConfig());
-        cacheConfigurations.put("dogBreedNameListCaching", RedisCacheConfiguration.defaultCacheConfig());
+        cacheConfigurations.put(FOOD_BY_NAME, RedisCacheConfiguration.defaultCacheConfig());
+        cacheConfigurations.put(FOODS_BY_SEARCH_COUNT, RedisCacheConfiguration.defaultCacheConfig());
+        cacheConfigurations.put(FOOD_NAMES_BY_TYPE, RedisCacheConfiguration.defaultCacheConfig());
+        cacheConfigurations.put(FOOD_TYPES, RedisCacheConfiguration.defaultCacheConfig());
+        cacheConfigurations.put(EXTERNAL_PRODUCT_BY_PRODUCT_NAME, RedisCacheConfiguration.defaultCacheConfig());
+        cacheConfigurations.put(PRODUCT_LIST_BY_FOOD, RedisCacheConfiguration.defaultCacheConfig());
+        cacheConfigurations.put(DOG_BREED_NAME_LIST, RedisCacheConfiguration.defaultCacheConfig());
 
         return RedisCacheManager.RedisCacheManagerBuilder
                 .fromConnectionFactory(connectionFactory)

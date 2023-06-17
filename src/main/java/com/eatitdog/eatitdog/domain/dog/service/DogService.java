@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.eatitdog.eatitdog.global.statics.CacheConfigKeyConstants.DOG_BREED_NAME_LIST;
+
 @ServiceWithTransactionalReadOnly
 @RequiredArgsConstructor
 public class DogService {
@@ -27,7 +29,7 @@ public class DogService {
         return dogRepository.findAllByUser(user);
     }
 
-    @Cacheable(value = "dogBreedNameListCaching")
+    @Cacheable(value = DOG_BREED_NAME_LIST)
     public List<String> getBreedNameList() {
         return breedRepository.findAll()
                 .stream()

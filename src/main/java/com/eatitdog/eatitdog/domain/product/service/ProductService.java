@@ -23,6 +23,9 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import static com.eatitdog.eatitdog.global.statics.CacheConfigKeyConstants.EXTERNAL_PRODUCT_BY_PRODUCT_NAME;
+import static com.eatitdog.eatitdog.global.statics.CacheConfigKeyConstants.PRODUCT_LIST_BY_FOOD;
+
 @ServiceWithTransactionalReadOnly
 @RequiredArgsConstructor
 public class ProductService {
@@ -42,7 +45,7 @@ public class ProductService {
         return ExternalProductResponse.dtoListToResponse(dto.getBody().getItems());
     }
 
-    @Cacheable(value = "externalProductByProductNameCaching", key = "#productName")
+    @Cacheable(value = EXTERNAL_PRODUCT_BY_PRODUCT_NAME, key = "#productName")
     public List<ExternalProductResponse> getExternalProductByName(String productName) {
         String url = getOpenAPIDefaultUriBuilder()
                 .queryParam("prdlstNm", URLEncoder.encode(productName, StandardCharsets.UTF_8))
@@ -52,7 +55,7 @@ public class ProductService {
         return ExternalProductResponse.dtoListToResponse(dto.getBody().getItems());
     }
 
-    @Cacheable(value = "productListByFoodCaching", key = "#foodName")
+    @Cacheable(value = PRODUCT_LIST_BY_FOOD, key = "#foodName")
     public List<Product> getProductListByFood(String foodName) {
         Food food = foodRepository.findByName(foodName)
                 .orElseThrow(() -> FoodNotFoundException.EXCEPTION);
