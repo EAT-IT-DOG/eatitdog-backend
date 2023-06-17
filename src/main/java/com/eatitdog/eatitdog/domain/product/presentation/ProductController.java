@@ -1,7 +1,6 @@
 package com.eatitdog.eatitdog.domain.product.presentation;
 
 import com.eatitdog.eatitdog.domain.product.domain.Product;
-import com.eatitdog.eatitdog.domain.product.presentation.dto.api.ProductAPIDto;
 import com.eatitdog.eatitdog.domain.product.presentation.dto.response.ExternalProductResponse;
 import com.eatitdog.eatitdog.domain.product.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
