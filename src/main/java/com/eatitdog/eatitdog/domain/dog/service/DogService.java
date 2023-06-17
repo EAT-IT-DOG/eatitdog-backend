@@ -10,6 +10,7 @@ import com.eatitdog.eatitdog.domain.dog.presentation.dto.request.CreateDogReques
 import com.eatitdog.eatitdog.domain.user.domain.User;
 import com.eatitdog.eatitdog.global.annotation.ServiceWithTransactionalReadOnly;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class DogService {
         return dogRepository.findAllByUser(user);
     }
 
+    @Cacheable(value = "dogBreedNameListCaching")
     public List<String> getBreedNameList() {
         return breedRepository.findAll()
                 .stream()

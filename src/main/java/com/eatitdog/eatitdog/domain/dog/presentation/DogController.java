@@ -28,7 +28,6 @@ public class DogController {
         return dogService.getDogsWithUser(user);
     }
 
-    // TODO : 캐싱 필요
     @GetMapping("/breed")
     @ResponseStatus(HttpStatus.OK)
     public List<String> getBreedNameList() {

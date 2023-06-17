@@ -53,6 +53,7 @@ public class CacheConfig {
         cacheConfigurations.put("foodTypesCaching", RedisCacheConfiguration.defaultCacheConfig());
         cacheConfigurations.put("externalProductByProductNameCaching", RedisCacheConfiguration.defaultCacheConfig());
         cacheConfigurations.put("productListByFoodCaching", RedisCacheConfiguration.defaultCacheConfig());
+        cacheConfigurations.put("dogBreedNameListCaching", RedisCacheConfiguration.defaultCacheConfig());
 
         return RedisCacheManager.RedisCacheManagerBuilder
                 .fromConnectionFactory(connectionFactory)

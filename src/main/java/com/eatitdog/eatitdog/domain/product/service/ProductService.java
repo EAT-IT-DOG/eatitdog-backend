@@ -105,6 +105,4 @@ public class ProductService {
                 .queryParam("returnType", "json")
                 .queryParam("ServiceKey", openApiProperties.getKey());
     }
-
-
 }
