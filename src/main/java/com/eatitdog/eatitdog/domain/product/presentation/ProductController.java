@@ -2,6 +2,7 @@ package com.eatitdog.eatitdog.domain.product.presentation;
 
 import com.eatitdog.eatitdog.domain.product.domain.Product;
 import com.eatitdog.eatitdog.domain.product.presentation.dto.api.ProductAPIDto;
+import com.eatitdog.eatitdog.domain.product.presentation.dto.response.ExternalProductResponse;
 import com.eatitdog.eatitdog.domain.product.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -18,25 +19,25 @@ public class ProductController {
 
     @GetMapping("/external-list")
     @Operation(summary = "get product list from Open API")
-    public ProductAPIDto getExternalProductList(
+    public List<ExternalProductResponse> getExternalProductList(
             @RequestParam int page,
             @RequestParam int size) {
         return productService.getExternalProductList(page, size);
     }
 
-    @GetMapping("/external-search")
+    @GetMapping("/external-search/{name}")
     @Operation(summary = "get product list from Open API searching with name of product")
-    public ProductAPIDto searchExternalProduct(@PathVariable String name) {
+    public List<ExternalProductResponse> searchExternalProduct(@PathVariable String name) {
         return productService.getExternalProductByName(name);
     }
 
-    @GetMapping("/food")
+    @GetMapping("/food/{name}")
     @Operation(summary = "get product list from DB")
     public List<Product> getProductListByFood(@PathVariable String name) {
         return productService.getProductListByFood(name);
     }
 
-    @GetMapping("/barcode")
+    @GetMapping("/barcode/{barcode}")
     @Operation(summary = "get product by barcode number")
     public Product getProductByBarcode(@PathVariable String barcode) {
         return productService.getProductByBarcode(barcode);

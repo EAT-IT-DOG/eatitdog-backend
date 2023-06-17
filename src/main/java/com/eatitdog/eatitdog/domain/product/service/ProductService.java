@@ -9,6 +9,7 @@ import com.eatitdog.eatitdog.domain.product.exception.ExternalProductNotFoundExc
 import com.eatitdog.eatitdog.domain.product.exception.ProductAlreadyExistsException;
 import com.eatitdog.eatitdog.domain.product.exception.ProductNotFoundException;
 import com.eatitdog.eatitdog.domain.product.presentation.dto.api.ProductAPIDto;
+import com.eatitdog.eatitdog.domain.product.presentation.dto.response.ExternalProductResponse;
 import com.eatitdog.eatitdog.global.annotation.ServiceWithTransactionalReadOnly;
 import com.eatitdog.eatitdog.global.infra.RestRequest;
 import com.eatitdog.eatitdog.global.lib.JsonStringToObjectMapper;
@@ -31,22 +32,24 @@ public class ProductService {
     private final FoodRepository foodRepository;
     private final RestRequest restRequest;
 
-    public ProductAPIDto getExternalProductList(int page, int size) {
+    public List<ExternalProductResponse> getExternalProductList(int page, int size) {
         String url = getOpenAPIDefaultUriBuilder()
                 .queryParam("pageNo", page)
                 .queryParam("numOfRows", size)
                 .build().toUriString();
         String response = restRequest.get(url, String.class);
-        return JsonStringToObjectMapper.convert(response, ProductAPIDto.class);
+        ProductAPIDto dto = JsonStringToObjectMapper.convert(response, ProductAPIDto.class);
+        return ExternalProductResponse.dtoListToResponse(dto.getBody().getItems());
     }
 
     @Cacheable(value = "externalProductByProductNameCaching", key = "#productName")
-    public ProductAPIDto getExternalProductByName(String productName) {
+    public List<ExternalProductResponse> getExternalProductByName(String productName) {
         String url = getOpenAPIDefaultUriBuilder()
                 .queryParam("prdlstNm", URLEncoder.encode(productName, StandardCharsets.UTF_8))
                 .build().toUriString();
         String response = restRequest.get(url, String.class);
-        return JsonStringToObjectMapper.convert(response, ProductAPIDto.class);
+        ProductAPIDto dto = JsonStringToObjectMapper.convert(response, ProductAPIDto.class);
+        return ExternalProductResponse.dtoListToResponse(dto.getBody().getItems());
     }
 
     @Cacheable(value = "productListByFoodCaching", key = "#foodName")
